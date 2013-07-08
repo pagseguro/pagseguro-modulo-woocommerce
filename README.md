@@ -1,4 +1,7 @@
-woocommerce
-===========
-
-Módulo de integração para WordPress/WooCommerce
+Módulo de integração PagSeguro para WooCommerce
+===============================================
+---
+Descrição
+---------
+---
+WIP
