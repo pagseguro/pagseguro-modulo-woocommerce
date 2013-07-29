@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/uol-fila-pagseguro/!svn/ver/442/trunk/fontes/woocommerce/PagSeguroLibrary/utils
+END
+PagSeguroXmlParser.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/uol-fila-pagseguro/!svn/ver/436/trunk/fontes/woocommerce/PagSeguroLibrary/utils/PagSeguroXmlParser.class.php
+END
+PagSeguroHttpConnection.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/uol-fila-pagseguro/!svn/ver/442/trunk/fontes/woocommerce/PagSeguroLibrary/utils/PagSeguroHttpConnection.class.php
+END
