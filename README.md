@@ -14,7 +14,7 @@ Requisitos
 ----------
 ---
  - [WordPress] 3.5.2
- - [WooCommerce] 2.0.12
+ - [WooCommerce] 2.0.13
  - [PHP] 5.3.9+
  - [SPL]
  - [cURL]
@@ -36,19 +36,16 @@ Configuração
 Para acessar e configurar o módulo acesse, na área administrativa de seu WordPress, o menu WooCommerce -> Configurações -> Portais de Pagamento -> PagSeguro. As opções disponíveis estão descritas abaixo.
 
  - **ativar/desativar**: ativa/desativa o módulo.
- - **título**: Título a ser exibida na tela de pagamento.
+ - **título**: Título a ser exibido na tela de pagamento.
  - **descrição**: Descrição a ser exibida na tela de pagamento.
- - **ativar módulo**: ativa/desativa o módulo.
- - **title**: Título a ser exibida na tela de pagamento.
- - **description**: Descrição a ser exibida na tela de pagamento.
  - **e-mail**: e-mail cadastrado no PagSeguro.
  - **token**: token gerado no PagSeguro.
  - **url de redirecionamento**: ao final do fluxo de pagamento no PagSeguro, seu cliente será redirecionado automaticamente para a página de confirmação em sua loja ou então para a URL que você informar neste campo. Para ativar o redirecionamento ao final do pagamento é preciso ativar o serviço de [Pagamentos via API]. Obs.: Esta URL é informada automaticamente e você só deve alterá-la caso deseje que seus clientes sejam redirecionados para outro local.
  - **url de notificação**: sempre que uma transação mudar de status, o PagSeguro envia uma notificação para sua loja ou para a URL que você informar neste campo. Obs.: Esta URL é informada automaticamente e você só deve alterá-la caso deseje receber as notificações em outro local.
- - **prefixo do pedido**: informe um prefixo para diferenciar a origem de suas vendas caso utilize a mesma conta PagSeguro em múltiplas lojas. 
+ - **prefixo dos pedidos**: informe um prefixo para diferenciar a origem de suas vendas caso utilize a mesma conta PagSeguro em múltiplas lojas. 
  - **charset**: codificação do seu sistema (ISO-8859-1 ou UTF-8).
  - **log**: ativa/desativa a geração de logs.
- - **diretório**: informe o local a partir da raíz de instalação do Zen Cart onde se deseja criar o arquivo de log. Ex.: /logs/ps.log. Caso não informe nada, o log será gravado dentro da pasta ../PagSeguroLibrary/PagSeguro.log.
+ - **diretório**: informe o local a partir da raíz de instalação do WordPress onde se deseja criar o arquivo de log. Ex.: /logs/ps.log. Caso não informe nada, o log será gravado dentro da pasta ../PagSeguroLibrary/PagSeguro.log.
 
 
 Changelog
