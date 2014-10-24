@@ -77,6 +77,12 @@ ipch/
 *.psess
 *.vsp
 
+#################
+## Sonar
+#################
+.sonar/
+sonar-project.properties
+
 # ReSharper is a .NET coding add-in
 _ReSharper*
 

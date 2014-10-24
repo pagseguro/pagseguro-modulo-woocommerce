@@ -51,6 +51,10 @@ Para acessar e configurar o módulo acesse, na área administrativa de seu WordP
 Changelog
 ---------
 ---
+1.1
+
+ - Ajuste na ativação/desativação do módulo.
+
 1.0
 
  - Versão inicial. Integração com API de checkout e API de notificações.

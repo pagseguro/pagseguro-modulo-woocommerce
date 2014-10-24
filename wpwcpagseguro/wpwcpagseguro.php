@@ -57,7 +57,7 @@ function init_wp_wc_pagseguro_gateway_function() {
          * Version Plugin
          * @var version
          */
-        private $plugin_version = '1.0';
+        private $plugin_version = '1.1';
         
         
         /**
