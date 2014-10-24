@@ -95,7 +95,10 @@ function init_wp_wc_pagseguro_gateway_function() {
                 add_action( 'woocommerce_update_options_payment_gateways', array( &$this, 'process_admin_options' ) );
             }
             
-            $this->enabled = ( 'yes' == $this->settings['enabled'] ) && ! empty( $this->email ) && ! empty( $this->token ) && $this->is_valid_for_use();
+            $this->enabled = 'no';
+            if ((( 'yes' == $this->settings['enabled'] ) && ! empty( $this->email ) && ! empty( $this->token ) && $this->is_valid_for_use())) {
+                $this->enabled = 'yes';
+            }
 
             // Checks if email is not empty.
             if ( empty( $this->email ) ) {
@@ -171,7 +174,7 @@ function init_wp_wc_pagseguro_gateway_function() {
 
             $this->form_fields = array(
                 'enabled' => array(
-                    'title' => __ ( 'Enable/Disable', 'wpwcpagseguro' ),
+                    'title' => __( 'Enable/Disable', 'wpwcpagseguro' ),
                     'type' => 'checkbox',
                     'label' => __( 'Enable module?', 'wpwcpagseguro' ),
                     'default' => 'yes'
