@@ -59,7 +59,7 @@ class WP_WC_Modal_Pagseguro {
         $term_id = NULL;
         
         if(isset($name) && !empty($name)){
-            $term_id = $wpdb->get_var($wpdb->prepare("SELECT term_id FROM $wpdb->terms WHERE name LIKE '".trim($name)."'"));
+            $term_id = $wpdb->get_var($wpdb->prepare("SELECT term_id FROM $wpdb->terms WHERE name LIKE %s", trim($name)));
             return !empty($term_id) ? $term_id : NULL;
         }
         
@@ -79,7 +79,7 @@ class WP_WC_Modal_Pagseguro {
         $term_name = NULL;
         
         if(isset($key) && !empty($key)){
-            $term_name = $wpdb->get_var($wpdb->prepare("SELECT name FROM $wpdb->terms WHERE term_id = $key"));
+            $term_name = $wpdb->get_var($wpdb->prepare("SELECT name FROM $wpdb->terms WHERE term_id = %s", $key));
             return !empty($term_name) ? $term_name : NULL;
         }
         
@@ -94,8 +94,8 @@ class WP_WC_Modal_Pagseguro {
      */
     public function updateOrder($order_id, $term_id){
         global $wpdb;
-        $term_taxonomy_id = $wpdb->get_var($wpdb->prepare("SELECT term_taxonomy_id FROM $wpdb->term_taxonomy WHERE term_id = $term_id"));
-        $term_taxonomy_id_relation = $wpdb->get_var($wpdb->prepare("SELECT term_taxonomy_id FROM $wpdb->term_relationships WHERE object_id = $order_id"));
+        $term_taxonomy_id = $wpdb->get_var($wpdb->prepare("SELECT term_taxonomy_id FROM $wpdb->term_taxonomy WHERE term_id = %s", $term_id));
+        $term_taxonomy_id_relation = $wpdb->get_var($wpdb->prepare("SELECT term_taxonomy_id FROM $wpdb->term_relationships WHERE object_id = %s", $order_id));
         if($term_taxonomy_id == $term_taxonomy_id_relation){
             return false;
         }else{

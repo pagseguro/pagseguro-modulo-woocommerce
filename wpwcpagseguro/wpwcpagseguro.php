@@ -114,7 +114,7 @@ function init_wp_wc_pagseguro_gateway_function() {
 
             // Active logs.
             if ( 'yes' == $this->debug ) {
-                $this->log = $woocommerce->logger();
+                $this->log = new WC_Logger();
                 $this->createLogFile($this->returnPathLog());
                 PagSeguroConfig::activeLog($this->returnPathLog());
             }
