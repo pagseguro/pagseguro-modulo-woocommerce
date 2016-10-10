@@ -1,10 +1,42 @@
 <?php
 /**
+ ************************************************************************
+Copyright [2016] [PagSeguro Internet Ltda.]
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+ ************************************************************************
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
+/**
  * WC PagSeguro Gateway Class.
  *
  */
 class WC_PagSeguro_Gateway extends WC_Payment_Gateway
 {
+
+
+    /**
+     *
+     */
+    const STANDARD_JS = "https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js";
+    /**
+     *
+     */
+    const SANDBOX_JS = "https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js";
 
     public function __construct()
     {
@@ -14,7 +46,7 @@ class WC_PagSeguro_Gateway extends WC_Payment_Gateway
         $this->id             = 'pagseguro';
         $this->has_fields     = false;
         $this->method_title   = __('PagSeguro', 'woocomerce-pagseguro-oficial');
-        $this->icon           = plugins_url( 'assets/images/ps-logo.png', __FILE__ );
+        $this->icon           = plugins_url( 'assets/images/logo_pagseguro200x41.png', __DIR__ );
 
         // Load the form fields.
         $this->init_form_fields();
@@ -28,6 +60,7 @@ class WC_PagSeguro_Gateway extends WC_Payment_Gateway
         $this->email            = $this->settings['email'];
         $this->token            = $this->settings['token'];
         $this->environment      = $this->settings['environment'];
+        $this->checkout         = $this->settings['checkout'];
         $this->debug            = $this->settings['debug'];
         $this->path_log         = $this->settings['path_log'];
 
@@ -69,11 +102,12 @@ class WC_PagSeguro_Gateway extends WC_Payment_Gateway
      * Use PagSeguroLibrary
      *
      * @param type $order
+     * @param boolean $onlyCode
      * @return type
      */
-    public function payment($order){
+    public function payment($order, $onlyCode = false){
         $api = new WC_PagSeguro_Api($this->settings);
-        return $api->checkout($order);
+        return $api->checkout($order, $onlyCode);
 
     }
 
@@ -104,12 +138,10 @@ class WC_PagSeguro_Gateway extends WC_Payment_Gateway
      * @return array
      */
     public function process_payment( $order_id ) {
+
         global $woocommerce;
 
         $order = new WC_Order( $order_id );
-
-        $url = $this->payment($order);
-
 
         if ( 'yes' == $this->debug ) {
             $this->log->add( 'pagseguro', 'Payment arguments for order #' . $order_id . ': ' . print_r( $order, true ) );
@@ -128,10 +160,22 @@ class WC_PagSeguro_Gateway extends WC_Payment_Gateway
         $modal_pagseguro->updateOrder($order_id, $key);
         $modal_pagseguro->saveHistoric($order_id, $modal_pagseguro->getNameOrderStatusByKey($key), true);
 
+        if ($this->checkout == 'lightbox') {
+            $code = $this->payment($order, true);
+            $url = 'http://uol-pagseguro-moscou.stg2.local/wordpress/4.6.1/pagseguro/checkout';
+            add_user_meta( get_current_user_id(), '_pagseguro_data', [
+                'code' => $code,
+                'js' => ($this->environment == 'sandbox') ? self::SANDBOX_JS : self::STANDARD_JS
+            ]);
+        }
+
+        if ($this->checkout == 'standard') {
+            $url = $this->payment($order);
+        }
 
         return array(
-            'result'    => 'success',
-            'redirect'  => $url
+            'result' => 'success',
+            'redirect' => $url
         );
     }
 
@@ -174,11 +218,20 @@ class WC_PagSeguro_Gateway extends WC_Payment_Gateway
                 'default' => ''
             ),
             'environment' => array(
-                'title' => __('Choose your environment', 'woocomerce-pagseguro-oficial' ),
+                'title' => __('Environment', 'woocomerce-pagseguro-oficial' ),
                 'type' => 'select',
                 'options' => array(
                     'production' => 'Production',
                     'sandbox' => 'Sandbox'
+                ),
+                'default' => ''
+            ),
+            'checkout' => array(
+                'title' => __('Checkout', 'woocomerce-pagseguro-oficial' ),
+                'type' => 'select',
+                'options' => array(
+                    'standard' => 'Padrão',
+                    'lightbox' => 'Lightbox'
                 ),
                 'default' => ''
             ),
@@ -285,3 +338,4 @@ class WC_PagSeguro_Gateway extends WC_Payment_Gateway
     }
 
 }
+
