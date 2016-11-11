@@ -42,15 +42,34 @@ Para acessar e configurar o módulo acesse, na área administrativa de seu WordP
  - **envinronment**: Ambiente de produção ou desenvolvimento (sandbox).
  - **url de redirecionamento**: ao final do fluxo de pagamento no PagSeguro, seu cliente será redirecionado automaticamente para a página de confirmação em sua loja ou então para a URL que você informar neste campo. Para ativar o redirecionamento ao final do pagamento é preciso ativar o serviço de [Pagamentos via API]. Obs.: Esta URL é informada automaticamente e você só deve alterá-la caso deseje que seus clientes sejam redirecionados para outro local.
  - **url de notificação**: sempre que uma transação mudar de status, o PagSeguro envia uma notificação para sua loja ou para a URL que você informar neste campo. Obs.: Esta URL é informada automaticamente e você só deve alterá-la caso deseje receber as notificações em outro local.
- - **prefixo dos pedidos**: informe um prefixo para diferenciar a origem de suas vendas caso utilize a mesma conta PagSeguro em múltiplas lojas. 
+ - **prefixo dos pedidos**: informe um prefixo para diferenciar a origem de suas vendas caso utilize a mesma conta PagSeguro em múltiplas lojas. O formato deve se manter com o prefixo 'WC-' seguido por treze caracteres alphanuméricos.
  - **charset**: codificação do seu sistema (ISO-8859-1 ou UTF-8).
  - **log**: ativa/desativa a geração de logs.
  - **diretório**: informe o local a partir da raíz de instalação do WordPress onde se deseja criar o arquivo de log. Ex.: /logs/ps.log. Caso não informe nada, o log será gravado dentro da pasta ../PagSeguroLibrary/PagSeguro.log.
 
+Inputs
+---------
+---
+| Dados do comprador         |Tipo  | Esperado                                                                       |
+| ---------------------------|:----:|:------------------------------------------------------------------------------:| 
+| First Name / Primeiro Nome | {String}                                                             | Nome           | 
+| Last Name  / Sobrenome     | {String}                                                             | Sobrenome      |  
+| Company  / Empresa         | {String}                                                             | Empresa        | 
+| Email                      | {Pattern - ^([a-zA-Z0-9_])+([@])+([a-zA-Z0-9_])+([.])+([a-zA-Z0-9_])}| email@email.em |
+| Phone / Telefone           | {Integer} - {DDD+NUMBER}                                             | 99999999999    | 
+| Address 1 / Endereço da rua| {String, Integer}                                                    |Endereço, Numero| 
+| Address 2 / Complemento    | {String}                                                          | Bairro / Outros...| 
+| City / Cidade              | {String}                                                             |    Cidade      |
+| PostCode/ CEP              | {Integer or String}                                            | 99999999 / 99999-999 |
 
 Changelog
 ---------
 ---
+1.3.0
+ - Implementado conciliação e cancelamento.
+
+1.2.0
+ - Implementado checkout com lightbox.
 
 1.1.1
 - Ajustes em geral
@@ -113,3 +132,4 @@ Achou e corrigiu um bug ou tem alguma feature em mente e deseja contribuir?
   [cURL]: http://php.net/manual/en/book.curl.php
   [DOM]: http://php.net/manual/en/book.dom.php
   [GitHub]: https://github.com/pagseguro/woocommerce
+

@@ -27,7 +27,7 @@ if ( ! class_exists( 'WC_PagSeguro' ) ) :
          *
          * @var string
          */
-        const VERSION = '1.1.1';
+        const VERSION = '1.3.0';
 
         /**
          * Instance of this class.
