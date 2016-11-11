@@ -31,15 +31,18 @@ class WC_Pagseguro_Model {
      * 
      * @var array 
      */
-    private static $array_order_status = array(
-	0 => 'pending',
-        1 => 'on-hold',
-        2 => 'processing',
-        3 => 'completed',
-        4 => 'completed',
-        5 => 'em disputa',
-        6 => 'refunded',
-        7 => 'cancelled');
+    public static $array_order_status = array(
+        0 => "wc-ps-iniciado",
+        1 => "wc-ps-pagamento",
+        2 => "wc-ps-em-analise",
+        3 => "wc-ps-paga",
+        4 => "wc-ps-disponivel",
+        5 => "wc-ps-em-disputa",
+        6 => "wc-ps-devolvida",
+        7 => "wc-ps-cancelada",
+        8 => "wc-ps-chargeback-debitado",
+        9 => "wc-ps-em-contestacao"
+    );
     
     /**
      * Use for get $array_order_status
@@ -95,8 +98,9 @@ class WC_Pagseguro_Model {
     /**
      * Update status in table wp_term_relationships
      * 
-     * @param type $order_id, reference order
-     * @param type $term_id, id status
+     * @param $order_id, reference order
+     * @param $term_id, id status
+     * @return boolean
      */
     public function updateOrder($order_id, $term_id){
         global $wpdb;

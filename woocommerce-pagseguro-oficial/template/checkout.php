@@ -31,7 +31,7 @@ if ($user_data) {
         '<?php echo current($user_data['code']); ?>',
         {
             success: function () {
-                window.location.href = "<?php echo sprintf('%s/%s', get_site_url(), 'checkout/order-received');?>";
+                window.location.href = "<?php echo sprintf('%s/%s', get_site_url(), 'index.php/checkout/order-received');?>";
 
             },
             abort: function (error) {

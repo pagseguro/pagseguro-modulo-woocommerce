@@ -48,7 +48,7 @@ msgstr "Descrição"
 msgid "Checkout description."
 msgstr "Descrição que será visualizada pelo comprador."
 
-#: class-wc-pagseguro-gateway.class.php:206
+#: class-'wc-pagseguro-gateway.class.php:206
 msgid ""
 "Choose between many payment methods, including credit cards and Brazilian "
 "banks. Pay securely and quickly with PagSeguro"

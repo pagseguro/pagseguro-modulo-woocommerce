@@ -150,19 +150,13 @@ class WC_PagSeguro_Gateway extends WC_Payment_Gateway
         //Remove Items Cart
         $woocommerce->cart->empty_cart();
 
-        //Update status to Awaiting payment
-        $modal_pagseguro = new WC_Pagseguro_Model();
+        $array_order = WC_Pagseguro_Model::$array_order_status;
 
-        $array_order = $modal_pagseguro->getOrderStatus();
-
-        $key = $modal_pagseguro->getKeyOrderStatusByName($array_order[1]);
-
-        $modal_pagseguro->updateOrder($order_id, $key);
-        $modal_pagseguro->saveHistoric($order_id, $modal_pagseguro->getNameOrderStatusByKey($key), true);
+        $order->update_status($array_order[1]);
 
         if ($this->checkout == 'lightbox') {
             $code = $this->payment($order, true);
-            $url = 'http://uol-pagseguro-moscou.stg2.local/wordpress/4.6.1/pagseguro/checkout';
+            $url = get_home_url().'/index.php/pagseguro/checkout';
             add_user_meta( get_current_user_id(), '_pagseguro_data', [
                 'code' => $code,
                 'js' => ($this->environment == 'sandbox') ? self::SANDBOX_JS : self::STANDARD_JS
@@ -250,7 +244,7 @@ class WC_PagSeguro_Gateway extends WC_Payment_Gateway
                 'title' => __( 'Invoice Prefix', 'woocomerce-pagseguro-oficial' ),
                 'type' => 'text',
                 'description' => __( 'Prefix for your invoice numbers.', 'woocomerce-pagseguro-oficial' ),
-                'default' => 'WC-'
+                'default' => sprintf('%s-',strtoupper(uniqid('WC-')))
             ),
             'charset' => array(
                 'title' => __( 'Charset', 'woocomerce-pagseguro-oficial' ),
