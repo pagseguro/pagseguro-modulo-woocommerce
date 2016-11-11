@@ -1,0 +1,262 @@
+.ps-clearfix:before,
+.ps-clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.ps-clearfix:after {
+    clear: both;
+}
+
+/*===========================================================
+    Overlay's/Modal's
+============================================================ */
+body.ps-modal-opened {
+    position: relative;
+    overflow: hidden;
+}
+
+    body.ps-modal-opened .ps-modal-overlay {
+        visibility: visible;
+        opacity: 1;
+    }
+
+.ps-modal-overlay {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 999999;
+
+    /* manager status */
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: all .15s ease 0s;
+    -moz-transition: all .15s ease 0s;
+    transition: all .15s ease 0s;
+}
+
+/*===========================================================
+    Modal
+============================================================ */
+.ps-modal {
+    position: absolute;
+    top: 50%;
+    left: 0px;
+    right: 0px;
+    margin: 0px auto;
+    width: 600px;
+    background-color: #FFF;
+    -webkit-transition: all .2s linear 0s;
+    -moz-transition: all .2s linear 0s;
+    transition: all .2s linear 0s;
+    /* manager status */
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transform: -webkit-translateY(-80%);
+    -moz-transform: -moz-translateY(-80%);
+    transform: translateY(-80%);
+}
+
+    .ps-modal.show {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .ps-modal.ps-success.show,
+    .ps-modal.ps-error.show,
+    .ps-modal.ps-warning.show,
+    .ps-modal.ps-confirm.show {
+        -webkit-transform: -webkit-translateY(-50%);
+        -moz-transform: -moz-translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .ps-modal > .header,
+    .ps-modal > .content,
+    .ps-modal > .footer {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .ps-modal > .header {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    /* HEADER */
+    .ps-modal > .header {
+        background-color: #CCCCCC;
+    }
+
+    .ps-modal > .header > .title {
+        margin: 0px;
+        color: #FFF;
+    }
+
+    /* CONTENT */
+    .ps-modal > .content {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    /* FOOTER */
+    .ps-modal > .footer {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        border-top: 1px solid #CCCCCC;
+    }
+
+/* Loading Modal
+============================================================ */
+.ps-modal.ps-loading {
+    width: 120px;
+    height: 120px;
+    background-color: transparent;
+    -webkit-transform: -webkit-translateY(-50%);
+    -moz-transform: -moz-translateY(-50%);
+    transform: translateY(-50%);
+}
+
+/* Success Modal
+============================================================ */
+.ps-modal.ps-success > .header {
+    background-color: #46CF60;
+}
+/* Error Modal
+============================================================ */
+.ps-modal.ps-error > .header {
+    background-color: #FF2A2A;
+}
+/* Warning Modal
+============================================================ */
+.ps-modal.ps-warning > .header {
+    background-color: #F49F25;
+}
+/* Confirm Modal
+============================================================ */
+.ps-modal.ps-confirm > .header {
+    background-color: #2BBAFC;
+}
+
+/* Buttons
+============================================================ */
+.ps-button {
+    font-size: 14px;
+    text-align: center;
+    color: #444;
+    padding: 8px 12px;
+    cursor: pointer;
+    float: right;
+    background: transparent;
+    border: 1px solid #222;
+    outline: inherit;
+
+    -webkit-transition: background .15s linear, color .15s linear, box-shadow .10s ease;
+    -moz-transition: background .15s linear, color .15s linear, box-shadow .10s ease;
+    transition: background .15s linear, color .15s linear, box-shadow .10s ease;
+}
+
+    .ps-button:hover,
+    .ps-button:focus {
+        color: #FFF;
+        background-color: #444;
+    }
+
+    .ps-button.ps-success,
+    .ps-button.ps-cancel {
+        color: #FFF;
+        border: 0px;
+    }
+
+    .ps-button.ps-success:hover,
+    .ps-button.ps-success:focus,
+    .ps-button.ps-cancel:hover,
+    .ps-button.ps-cancel:focus {
+        -webkit-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        -moz-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    }
+    .ps-button.ps-success {
+        background-color: #46CF60;
+    }
+
+    .ps-button.ps-success:hover,
+    .ps-button.ps-success:focus {
+        background-color: #30BB4A;
+    }
+
+    .ps-button.ps-cancel {
+        margin-right: 30px;
+        background-color: #FF2A2A;
+    }
+
+    .ps-button.ps-cancel:hover,
+    .ps-button.ps-cancel:focus {
+        background-color: #EF1818;
+    }
+
+/*===========================================================
+    Order States
+============================================================ */
+.order_status > mark[class^="ps-"]::after {
+    font-family: WooCommerce;
+    speak: none;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    text-indent: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.order_status > .ps-paga::after {
+    content: "\e015";
+    color: #2ea2cc;
+}
+
+.order_status > .ps-pagamento::after,
+.order_status > .ps-em-analise::after {
+    content: "\e012";
+    color: #ffba00;
+}
+
+.order_status > .ps-em-disputa::after,
+.order_status > .ps-em-contestacao::after {
+    content: "\e033";
+    color: #999;
+}
+
+.order_status > .ps-devolvida::after,
+.order_status > .ps-chargeback-debitado::after {
+    content: "\e014";
+    color: #999;
+}
+
+.order_status > .ps-iniciado::after,
+.order_status > .ps-disponivel::after {
+    content: "\e011";
+    color: #73a724;
+}
+
+.order_status > .ps-cancelada::after {
+    content: "\e013";
+    color: #a00;
+}

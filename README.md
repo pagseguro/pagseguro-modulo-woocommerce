@@ -14,11 +14,10 @@ Requisitos
 ----------
 ---
  - [WordPress] 3.5.2
- - [WooCommerce] 2.0.13
- - [PHP] 5.3.9+
- - [SPL]
+ - [WooCommerce] 2.1+
+ - [PHP] 5.4.27
+ - [SimpleXml]
  - [cURL]
- - [DOM]
 
 
 Instalação
@@ -26,7 +25,7 @@ Instalação
 ---
  - Certifique-se de que não há instalação de outros módulos para o PagSeguro em seu sistema;
  - Baixe o repositório como arquivo zip ou faça um clone;
- - Na área administrativa de seu WordPress acesse o menu Plugins -> Adicionar Novo -> Enviar -> aponte para o caminho do arquivo wpwcpagseguro.zip e selecione Instalar Agora;
+ - Na área administrativa de seu WordPress acesse o menu Plugins -> Adicionar Novo -> Enviar -> aponte para o caminho do arquivo woocommerce-pagseguro-oficial.zip e selecione Instalar Agora;
  - Após a instalação selecione *Ativar plugin*;
 
 
@@ -40,6 +39,7 @@ Para acessar e configurar o módulo acesse, na área administrativa de seu WordP
  - **descrição**: Descrição a ser exibida na tela de pagamento.
  - **e-mail**: e-mail cadastrado no PagSeguro.
  - **token**: token gerado no PagSeguro.
+ - **envinronment**: Ambiente de produção ou desenvolvimento (sandbox).
  - **url de redirecionamento**: ao final do fluxo de pagamento no PagSeguro, seu cliente será redirecionado automaticamente para a página de confirmação em sua loja ou então para a URL que você informar neste campo. Para ativar o redirecionamento ao final do pagamento é preciso ativar o serviço de [Pagamentos via API]. Obs.: Esta URL é informada automaticamente e você só deve alterá-la caso deseje que seus clientes sejam redirecionados para outro local.
  - **url de notificação**: sempre que uma transação mudar de status, o PagSeguro envia uma notificação para sua loja ou para a URL que você informar neste campo. Obs.: Esta URL é informada automaticamente e você só deve alterá-la caso deseje receber as notificações em outro local.
  - **prefixo dos pedidos**: informe um prefixo para diferenciar a origem de suas vendas caso utilize a mesma conta PagSeguro em múltiplas lojas. 
@@ -51,11 +51,15 @@ Para acessar e configurar o módulo acesse, na área administrativa de seu WordP
 Changelog
 ---------
 ---
-1.1
+
+1.1.1
+- Ajustes em geral
+
+1.1.0
 
  - Ajuste na ativação/desativação do módulo.
 
-1.0
+1.0.0
 
  - Versão inicial. Integração com API de checkout e API de notificações.
 
