@@ -93,6 +93,7 @@ if ( ! class_exists( 'WC_PagSeguro' ) ) :
             require_once 'classes/class-wc-pagseguro-api.class.php';
             require_once 'classes/class-wc-pagseguro-gateway.class.php';
             require_once 'classes/class-wc-pagseguro-model.class.php';
+            require_once 'classes/class-wc-pagseguro-shortcodes.php';
         }
 
         /**
@@ -109,6 +110,15 @@ if ( ! class_exists( 'WC_PagSeguro' ) ) :
     }
 
     add_action( 'plugins_loaded', array( 'WC_PagSeguro', 'get_instance' ) );
+
+    /**
+     * Setup activation hook
+     */
+    register_activation_hook( __FILE__, function (){
+        require_once 'classes/class-wc-pagseguro-setup.php';
+        require_once 'classes/class-wc-pagseguro-pages.php';
+        WC_PagSeguro_Setup::plugin_activated();
+    });
 
     /**
      *  Call actions for notification
