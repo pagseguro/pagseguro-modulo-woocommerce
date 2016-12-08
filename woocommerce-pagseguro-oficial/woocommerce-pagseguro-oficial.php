@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
-if ( ! class_exists( 'WC_PagSeguro' ) ) :
+if ( ! class_exists( 'WC_PagSeguro' )) :
 
     class WC_PagSeguro {
 
@@ -38,16 +38,23 @@ if ( ! class_exists( 'WC_PagSeguro' ) ) :
 
         public function __construct()
         {
-
             // Load plugin text domain
             add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
             // Checks with WooCommerce is installed.
             if ( class_exists( 'WC_Payment_Gateway' ) ) {
                 $this->requires();
+
+                WC_PagSeguro_Shortcodes::init();
+                WC_PagSeguro_Status::init();
+
+                // Filters
                 add_filter( 'woocommerce_payment_gateways', array( $this, 'add_gateway' ) );
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'plugin_action_links' ) );
+
+                // Actions
                 add_action( 'init', 'notification_listener');
+                add_action( 'init', array( $this, 'ajax_listener'));
             } else {
                 add_action( 'admin_notices', array( $this, 'woocommerce_missing_notice' ) );
             }
@@ -94,6 +101,44 @@ if ( ! class_exists( 'WC_PagSeguro' ) ) :
             require_once 'classes/class-wc-pagseguro-gateway.class.php';
             require_once 'classes/class-wc-pagseguro-model.class.php';
             require_once 'classes/class-wc-pagseguro-shortcodes.php';
+            require_once 'classes/class-wc-pagseguro-admin.php';
+            require_once 'classes/class-wc-pagseguro-status.php';
+            require_once 'classes/class-wc-pagseguro-payload.php';
+            require_once 'classes/admin/class-wc-pagseguro-methods.php';
+            require_once 'classes/admin/class-wc-pagseguro-conciliation.php';
+            require_once 'classes/admin/class-wc-pagseguro-cancel.php';
+        }
+
+        /**
+         * Ajax listener
+         */
+        public function ajax_listener()
+        {
+            $requests = $this->filter_requests();
+
+            if (! is_null($requests['is_ajax']) && $requests['is_ajax'] && $requests['action'] == 'conciliation') {
+                $conciliation = new WC_PagSeguro_Conciliation;
+                $conciliation->init(get_option('woocommerce_pagseguro_settings'));
+            }
+
+            if (! is_null($requests['is_ajax']) && $requests['is_ajax'] && $requests['action'] == 'cancel') {
+                $cancel = new WC_PagSeguro_Cancel();
+                $cancel->init(get_option('woocommerce_pagseguro_settings'));
+            }
+        }
+
+        /**
+         * Get requests from http post|get
+         *
+         * @return array
+         */
+        public function filter_requests()
+        {
+
+            return [
+                'is_ajax' => (!isset($_REQUEST['ajax'])) ? null: filter_var($_REQUEST['ajax'], FILTER_SANITIZE_STRING),
+                'action'  => (!isset($_REQUEST['action'])) ? null : filter_var($_REQUEST['action'], FILTER_SANITIZE_STRING)
+            ];
         }
 
         /**
@@ -107,9 +152,54 @@ if ( ! class_exists( 'WC_PagSeguro' ) ) :
             return array_merge( $plugin_links, $links );
         }
 
+        /**
+         * WooCommerce fallback notice.
+         *
+         * @return  string
+         */
+        public function woocommerce_missing_notice() {
+            $html  = '<div class="error"><p>';
+            $html .= __( 'WooCommerce PagSeguro depends on the WooCommerce plugin to work!', 'woocommerce-pagseguro-oficial' );
+            $html .= '</p></div>';
+            echo $html;
+        }
+
     }
 
     add_action( 'plugins_loaded', array( 'WC_PagSeguro', 'get_instance' ) );
+
+    /**
+    * Insert Scripts PagSeguroLib to need in the <head> tag
+    **/
+    function template_scripts(){
+        $handle = 'data-table-styles';
+        $src = plugins_url('woocommerce-pagseguro-oficial/assets/css/jquery.dataTables.css');
+        $deps = '';
+        $ver = '1';
+        $media = 'screen';
+        wp_enqueue_style($handle, $src, $deps, $ver, $media);
+    };
+    add_action('admin_enqueue_scripts', 'template_scripts');
+
+
+    /**
+    * Insert Modal Markup in the top markup page
+    **/
+    function template_modals() {
+        include 'template/admin/modals.php';
+    };
+    add_action('admin_head', 'template_modals');
+
+    /**
+     *  Call actions for notification
+     */
+    function notification_listener()
+    {
+        if(isset($_REQUEST['notificationurl']) && $_REQUEST['notificationurl'] == "true" && isset($_POST)) {
+            $notification = new WC_PagSeguro_Gateway();
+            $notification->process_nofitication();
+        }
+    }
 
     /**
      * Setup activation hook
@@ -119,16 +209,5 @@ if ( ! class_exists( 'WC_PagSeguro' ) ) :
         require_once 'classes/class-wc-pagseguro-pages.php';
         WC_PagSeguro_Setup::plugin_activated();
     });
-
-    /**
-     *  Call actions for notification
-     */
-    function notification_listener()
-    {
-        if(isset($_REQUEST['notificationurl']) && $_REQUEST['notificationurl'] == "true" && isset($_POST)){
-            $notification = new WC_PagSeguro_Gateway();
-            $notification->process_nofitication();
-        }
-    }
 
 endif;
