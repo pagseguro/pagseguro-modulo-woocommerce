@@ -28,7 +28,6 @@ if ( ! class_exists('WC_PagSeguro_Admin')):
  */
 class WC_PagSeguro_Admin
 {
-
     /**
      * Register menus page.
      */
@@ -49,7 +48,7 @@ class WC_PagSeguro_Admin
                 __( 'PagSeguro', 'woocommerce-pagseguro-oficial' ),
                 'manage_options',
                 'wp_pagseguro_menu',
-                array(WC_PagSeguro_Admin::class, 'redirect_to_config_page')
+                array(new WC_PagSeguro_Admin(), 'redirect_to_config_page')
             );
         }
 
@@ -80,7 +79,7 @@ class WC_PagSeguro_Admin
             'Conciliação',
             'manage_options',
             'wp_pagseguro_conciliation_menu',
-            array(WC_PagSeguro_Admin::class, 'admin_page_conciliation')
+            array(new WC_PagSeguro_Admin(), 'admin_page_conciliation')
         );
     }
 
@@ -95,7 +94,7 @@ class WC_PagSeguro_Admin
             'Cancelamento',
             'manage_options',
             'wp_pagseguro_cancel_menu',
-            array(WC_PagSeguro_Admin::class, 'admin_page_cancel')
+            array(new WC_PagSeguro_Admin(), 'admin_page_cancel')
         );
     }
 
@@ -124,6 +123,6 @@ class WC_PagSeguro_Admin
     }
 }
 
-add_action( 'admin_menu', array(WC_PagSeguro_Admin::class, 'register_menus' ));
+add_action( 'admin_menu', array(new WC_PagSeguro_Admin(), 'register_menus' ));
 
 endif;

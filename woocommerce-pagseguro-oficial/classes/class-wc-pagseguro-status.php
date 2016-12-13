@@ -48,20 +48,20 @@ if ( ! class_exists('WC_PagSeguro_Status')):
          */
         public static function init(){
 
-                add_action( 'init', array(WC_PagSeguro_Status::class, 'register_ps_iniciado'));
-                add_action( 'init', array(WC_PagSeguro_Status::class, 'register_ps_aguardando_pagamento'));
-                add_action( 'init', array(WC_PagSeguro_Status::class, 'register_ps_em_analise'));
-                add_action( 'init', array(WC_PagSeguro_Status::class, 'register_ps_paga'));
-                add_action( 'init', array(WC_PagSeguro_Status::class, 'register_ps_disponivel'));
-                add_action( 'init', array(WC_PagSeguro_Status::class, 'register_ps_em_disputa'));
-                add_action( 'init', array(WC_PagSeguro_Status::class, 'register_ps_devolvida'));
-                add_action( 'init', array(WC_PagSeguro_Status::class, 'register_ps_cancelada'));
-                add_action( 'init', array(WC_PagSeguro_Status::class, 'register_ps_chargeback_debitado'));
-                add_action( 'init', array(WC_PagSeguro_Status::class, 'register_ps_em_constestacao'));
+                add_action( 'init', array(new WC_PagSeguro_Status(), 'register_ps_iniciado'));
+                add_action( 'init', array(new WC_PagSeguro_Status(), 'register_ps_aguardando_pagamento'));
+                add_action( 'init', array(new WC_PagSeguro_Status(), 'register_ps_em_analise'));
+                add_action( 'init', array(new WC_PagSeguro_Status(), 'register_ps_paga'));
+                add_action( 'init', array(new WC_PagSeguro_Status(), 'register_ps_disponivel'));
+                add_action( 'init', array(new WC_PagSeguro_Status(), 'register_ps_em_disputa'));
+                add_action( 'init', array(new WC_PagSeguro_Status(), 'register_ps_devolvida'));
+                add_action( 'init', array(new WC_PagSeguro_Status(), 'register_ps_cancelada'));
+                add_action( 'init', array(new WC_PagSeguro_Status(), 'register_ps_chargeback_debitado'));
+                add_action( 'init', array(new WC_PagSeguro_Status(), 'register_ps_em_constestacao'));
 
-                add_filter( 'wc_order_statuses', array(WC_PagSeguro_Status::class, 'register_ps_order_status'));
+                add_filter( 'wc_order_statuses', array(new WC_PagSeguro_Status(), 'register_ps_order_status'));
 
-                add_action('admin_print_styles', array(WC_PagSeguro_Status::class, 'add_css'));
+                add_action('admin_print_styles', array(new WC_PagSeguro_Status(), 'add_css'));
 
         }
 
