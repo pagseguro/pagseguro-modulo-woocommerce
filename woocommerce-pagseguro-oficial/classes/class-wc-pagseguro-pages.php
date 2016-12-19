@@ -58,6 +58,38 @@ if ( ! class_exists('WC_PagSeguro_Pages')):
         }
 
         /**
+         * Create PagSeguro Direct Payment Checkout Page
+         *
+         * @void
+         */
+        public function create_pagseguro_direct_payment_checkout_page($parent_id)
+        {
+            $checkout = array(
+                'name'    => _x( 'direct-payment', 'Page slug', 'woocommerce' ),
+                'title'   => _x( 'PagSeguro Checkout Transparente', 'Page title', 'woocommerce' ),
+                'content' => '[pagseguro_direct_payment]',
+                'parent'  => $parent_id
+            );
+            $this->create_page($checkout);
+        }
+
+        /**
+         * Create PagSeguro Direct Payment Checkout Page
+         *
+         * @void
+         */
+        public function create_pagseguro_order_confirmation_checkout_page($parent_id)
+        {
+            $checkout = array(
+                'name'    => _x( 'order-confirmation', 'Page slug', 'woocommerce-pagseguro-oficial' ),
+                'title'   => _x( 'PagSeguro Ordem Recebida', 'Page title', 'woocommerce-pagseguro-oficial' ),
+                'content' => '[pagseguro_order_confirmation]',
+                'parent'  => $parent_id
+            );
+            $this->create_page($checkout);
+        }
+
+        /**
          * Remove all PagSeguro pages
          */
         public function remove_pagseguro_pages()
@@ -74,7 +106,11 @@ if ( ! class_exists('WC_PagSeguro_Pages')):
         private function get_pagseguro_pages_ids()
         {
             global $wpdb;
-            return $wpdb->get_var( $wpdb->prepare( "SELECT option_value FROM $wpdb->options WHERE 'option_name' LIKE %s", 'woocommerce_ps_pagseguro%') );
+            return $wpdb->get_var(
+                $wpdb->prepare(
+                    "SELECT option_value FROM $wpdb->options WHERE 'option_name' LIKE %s", 'woocommerce_ps_pagseguro%'
+                )
+            );
         }
 
         /**

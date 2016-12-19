@@ -37,6 +37,14 @@ class WC_PagSeguro_Gateway extends WC_Payment_Gateway
      *
      */
     const SANDBOX_JS = "https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js";
+    /**
+     *
+     */
+    const DIRECT_PAYMENT_URL = "https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js";
+    /**
+     *
+     */
+    const DIRECT_PAYMENT_URL_SANDBOX = "https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js";
 
     public function __construct()
     {
@@ -108,7 +116,12 @@ class WC_PagSeguro_Gateway extends WC_Payment_Gateway
     public function payment($order, $onlyCode = false){
         $api = new WC_PagSeguro_Api($this->settings);
         return $api->checkout($order, $onlyCode);
+    }
 
+    private function create_session()
+    {
+        $api = new WC_PagSeguro_Api($this->settings);
+        return $api->create_session();
     }
 
     /**
@@ -148,7 +161,7 @@ class WC_PagSeguro_Gateway extends WC_Payment_Gateway
         }
 
         //Remove Items Cart
-        $woocommerce->cart->empty_cart();
+        //$woocommerce->cart->empty_cart();
 
         $array_order = WC_Pagseguro_Model::$array_order_status;
 
@@ -160,6 +173,15 @@ class WC_PagSeguro_Gateway extends WC_Payment_Gateway
             add_user_meta( get_current_user_id(), '_pagseguro_data', [
                 'code' => $code,
                 'js' => ($this->environment == 'sandbox') ? self::SANDBOX_JS : self::STANDARD_JS
+            ]);
+        }
+
+        if ($this->checkout == 'direct') {
+            $url = get_home_url().'/index.php/pagseguro/direct-payment';
+            add_user_meta( get_current_user_id(), '_pagseguro_data', [
+                'js' => ($this->environment == 'sandbox') ? self::DIRECT_PAYMENT_URL_SANDBOX : self::DIRECT_PAYMENT_URL,
+                'order_id' => $order_id,
+                'session_code' => $this->create_session()
             ]);
         }
 
@@ -225,7 +247,8 @@ class WC_PagSeguro_Gateway extends WC_Payment_Gateway
                 'type' => 'select',
                 'options' => array(
                     'standard' => 'Padrão',
-                    'lightbox' => 'Lightbox'
+                    'lightbox' => 'Lightbox',
+                    'direct'   => 'Checkout Transparente'
                 ),
                 'default' => ''
             ),
