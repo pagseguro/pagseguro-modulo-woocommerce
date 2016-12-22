@@ -1,32 +1,48 @@
 <div class="checkout-success">
-
-    <p>Numero da Ordem</p>
-
-    <p>'We\'ll email you an order confirmation with details and tracking info.'</p>
-
-    <?php var_dump($_REQUEST); ?>
-
+    <h1 class="title-detail">Detalhes do Pedido</h1>
+    <?php
+    $order = wc_get_order($_REQUEST['order_id']);
+    $public_view_order_url = esc_url( $order->get_view_order_url() );
+    ?>
     <?php if ($_REQUEST['checkout_type'] == 'boleto'): ?>
-    <div class="actions-toolbar">
-        <div class="primary">
-            <a class="action primary continue" target="_blank" href="<?= $_REQUEST['payment_link'];?>"><span>Imprimir boleto</span></a>
+        <div class="actions-toolbar">
+            <h2 class="title-order">Muito Obrigado Pela Sua Compra!!</h2>
+            <a class="action-order" href="<?= $public_view_order_url?>">
+                Ver pedido gerado
+            </a>
+            <p class="text-or">Ou</p>
+            <a class="action-order" target="_blank" href="<?= $_REQUEST['payment_link'];?>">
+                Imprimir boleto
+            </a>
         </div>
-    </div>
     <?php endif; ?>
 
     <?php if ($_REQUEST['checkout_type'] == 'debit'): ?>
-    <div class="actions-toolbar">
-        <div class="primary">
-            <a class="action primary continue" target="_blank" href="<?= $_REQUEST['payment_link'];?>"><span>Ir para o site do banco</span></a>
+        <div class="actions-toolbar">
+            <h2 class="title-order">Muito Obrigado Pela Sua Compra!!</h2>
+            <a class="action-order" href="<?= $public_view_order_url?>">
+                Ver pedido gerado
+            </a>
+            <p class="text-or">Ou</p>
+            <a class="action-order" target="_blank" href="<?= $_REQUEST['payment_link'];?>">
+                Ir para o site do banco
+            </a>
         </div>
-    </div>
     <?php endif; ?>
 
     <?php if ($_REQUEST['checkout_type'] == 'credit-card'): ?>
-    <div class="actions-toolbar">
-        <div class="primary">
-            <a class="action primary continue" href=""><span>Continue comprando</span></a>
+        <?php
+        $shop_url = get_site_url();
+        ?>
+        <div class="actions-toolbar">
+            <h2 class="title-order">Muito Obrigado Pela Sua Compra!!</h2>
+            <a class="action-order" href="<?= $public_view_order_url?>">
+                Ver pedido gerado
+            </a>
+            <p class="text-or">Ou</p>
+            <a class="action-order" href="<?= $shop_url?>">
+                Continue comprando
+            </a>
         </div>
-    </div>
     <?php endif; ?>
 </div>

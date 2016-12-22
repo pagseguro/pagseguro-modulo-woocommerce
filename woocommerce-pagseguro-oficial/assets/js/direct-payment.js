@@ -15,7 +15,6 @@ var WS = {
                     }).success(function (response) {
                         response = JSON.parse(response);
                         if (response.success) {
-                            console.log(response);
                             var newForm = jQuery('<form>', {
                                 'action': response.payload.data.url,
                                 'target': '_top',
@@ -27,6 +26,10 @@ var WS = {
                             })).append(jQuery('<input>', {
                                 'name': 'checkout_type',
                                 'value': 'boleto',
+                                'type': 'hidden'
+                            })).append(jQuery('<input>', {
+                                'name': 'order_id',
+                                'value': response.payload.data.order_id,
                                 'type': 'hidden'
                             }));
                             jQuery(newForm).submit();
@@ -53,7 +56,6 @@ var WS = {
                     }).success(function (response) {
                         response = JSON.parse(response);
                         if (response.success) {
-                            console.log(response);
                             var newForm = jQuery('<form>', {
                                 'action': response.payload.data.url,
                                 'target': '_top',
@@ -66,8 +68,11 @@ var WS = {
                                 'name': 'checkout_type',
                                 'value': 'debit',
                                 'type': 'hidden'
+                            })).append(jQuery('<input>', {
+                                'name': 'order_id',
+                                'value': response.payload.data.order_id,
+                                'type': 'hidden'
                             }));
-
                             jQuery(newForm).submit();
                         } else {
                             //@todo show error message and redirect to shop
@@ -100,7 +105,6 @@ var WS = {
                             });
                             //add installments options
                             jQuery.each(response.payload.data, function (i, item) {
-                                console.log(item);
                                 jQuery('#card_installments').append(jQuery('<option>', {
                                     value: item.totalAmount,
                                     text: item.text,
@@ -150,7 +154,11 @@ var WS = {
                                 'name': 'checkout_type',
                                 'value': 'credit-card',
                                 'type': 'hidden'
-                            }));
+                            })).append(jQuery('<input>', {
+                                'name': 'order_id',
+                                'value': response.payload.data.order_id,
+                                'type': 'hidden'
+                            }))
                             jQuery(newForm).submit();
                         } else {
                             //@todo show error message and redirect to shop

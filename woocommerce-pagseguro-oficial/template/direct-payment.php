@@ -20,17 +20,15 @@
 $user_data = get_user_meta(get_current_user_id(), '_pagseguro_data');
 if ($user_data) {
     $user_data = end($user_data);
-    delete_user_meta(get_current_user_id(), '_pagseguro_data');
+//    delete_user_meta(get_current_user_id(), '_pagseguro_data');
 } else {
-    echo "<script>window.location = history.back(-1);</script>";
+//    echo "<script>window.location = history.back(-1);</script>";
 }
 
 ?>
 <section class="ps-wrap">
     <section class="ps-tabs clearfix">
-
         <h2 class="title-payment">Finalizando sua compra com PagSeguro</h2>
-
         <section id="direct-payment" class="row" data-url="<?php echo get_home_url().'/index.php/wp-content/plugins/woocommerce-pagseguro-oficial/woocommerce-pagseguro-oficial.php?ajax=true';?>">
             <h2 class="title-payment">Formas de pagamento</h2>
             <h4 class="method-payment">Escolha o método</h4>
@@ -56,7 +54,7 @@ if ($user_data) {
                     </li><!-- /.item -->
                 </ul><!-- /.items -->
             </nav><!-- /.tabs-payment -->
-            <div class="tab-content col-xs-12 col-md-8 col-md-offset-2">
+            <div class="tab-content col-xs-12">
                 <div role="tabpanel" class="tab-pane active" id="credit-card">
                     <h3 class="title-tab">Cartão de Crédito</h3>
                     <form class="form-horizontal clearfix" name="form-credit">
@@ -215,7 +213,6 @@ if ($user_data) {
         //Event buttons methods buy types
         $('#payment-boleto').on('click', function(e){
             e.preventDefault();
-            //@todo start loading modal
             // load_elements('boleto') doesn't load bank and credit-card options.
             var elements = load_elements('boleto');
             set_session_code(elements.session_code);
@@ -224,7 +221,6 @@ if ($user_data) {
 
         $('#payment-debit').on('click', function(e){
             e.preventDefault();
-            //@todo start loading modal
             // load_elements('debit', true) doesn't credit-card options only bank options.
             var elements = load_elements('debit', true);
             set_session_code(elements.session_code);
@@ -233,7 +229,6 @@ if ($user_data) {
 
         $('#payment-credit-card').on('click', function(e){
             e.preventDefault();
-            //@todo start loading modal
             // load_elements('credit-card', true, true) load all options.
             var elements = load_elements('credit-card', true, true);
             set_session_code(elements.session_code);
@@ -386,11 +381,19 @@ if ($user_data) {
             };
         };
 
-        ;(function() {
+        (function() {
             $('#card_num').on('paste', function (e) {
                 e.preventDefault();
                 return false;
             });
-        }($));
+        }());
+
+        (function calcTotal() {
+            //Update the total value according with installments
+            $('#card_installments').on('change', function() {
+                var currency = parseFloat($(this).val()).toFixed(2);
+                $('#card_total').text('R$ ' + currency);
+            });
+        }());
     });
 </script>
