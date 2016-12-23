@@ -27,10 +27,17 @@ if ($user_data) {
 
 ?>
 <section class="ps-wrap">
+    <div id="loader">
+        <img src="<?= plugin_dir_url(__DIR__).'assets/images/load_blockui.gif'?>">
+    </div>
     <section class="ps-tabs clearfix">
         <h2 class="title-payment">Finalizando sua compra com PagSeguro</h2>
         <section id="direct-payment" class="row" data-url="<?php echo get_home_url().'/index.php/wp-content/plugins/woocommerce-pagseguro-oficial/woocommerce-pagseguro-oficial.php?ajax=true';?>">
             <h2 class="title-payment">Formas de pagamento</h2>
+            <div class="alert alert-danger hide" role="alert">
+                <strong>Ops!</strong>
+                Aconteceu um erro, verifique se os dados são válidos ou contate o administrador do sistema.
+            </div>
             <h4 class="method-payment">Escolha o método</h4>
             <nav class="tabs-pagseguro clearfix" id="tabs-payment">
                 <ul class="items clearfix" role="tablist">
@@ -57,29 +64,36 @@ if ($user_data) {
             <div class="tab-content col-xs-12">
                 <div role="tabpanel" class="tab-pane active" id="credit-card">
                     <h3 class="title-tab">Cartão de Crédito</h3>
-                    <form class="form-horizontal clearfix" name="form-credit">
+                    <form class="form-horizontal form-validate clearfix" name="form-credit">
                         <div class="form-group">
                             <label class="col-xs-12 col-sm-2 control-label" for="card_cod">CPF/CNPJ</label>
                             <div class="col-xs-12 col-sm-10">
                                 <input class="form-control cpf-cnpj-mask" id="document-credit-card" name="document" type="text">
+                                <span class="form-error hide">Este campo é obrigatório, não pode estar vazio.</span>
+                                <span class="form-error custom-validate document-personal hide">O número do documento não é válido.</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-xs-12 col-sm-2 control-label" for="card_num">Número do cartão</label>
                             <div class="col-xs-12 col-sm-10">
-                                <input class="form-control credit-card-mask" id="card_num" name="card_num" type="text" required>
+                                <input class="form-control credit-card-mask" id="card_num" name="card_num" type="text">
+                                <span class="form-error hide">Este campo é obrigatório, não pode estar vazio.</span>
+                                <span class="form-error custom-validate numbercard hide">O número do cartão não é válido.</span>
                             </div>
                         </div><!-- /.form-group -->
                         <div class="form-group">
                             <label class="col-xs-12 col-sm-2 control-label" for="card_holder_name">Nome impresso no cartão</label>
                             <div class="col-xs-12 col-sm-10">
-                                <input class="form-control" id="card_holder_name" name="card_holder_name" type="text" required>
+                                <input class="form-control" id="card_holder_name" name="card_holder_name" type="text">
+                                <span class="form-error hide">Este campo é obrigatório, não pode estar vazio.</span>
                             </div>
                         </div><!-- /.form-group -->
                         <div class="form-group">
                             <label class="col-xs-12 col-sm-2 control-label" for="card_holder_birthdate">Data de nascimento</label>
                             <div class="col-xs-12 col-sm-10">
-                                <input class="form-control date-mask" id="card_holder_birthdate" name="card_holder_birthdate" type="text" required="">
+                                <input class="form-control date-mask" id="card_holder_birthdate" name="card_holder_birthdate" type="text">
+                                <span class="form-error hide">Este campo é obrigatório, não pode estar vazio.</span>
+                                <span class="form-error custom-validate birthdate hide">A data de aniversário não é válida.</span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -102,6 +116,7 @@ if ($user_data) {
                                             <option value="11">11</option>
                                             <option value="12">12</option>
                                         </select>
+                                        <span class="form-error hide">Este campo é obrigatório, não pode estar vazio.</span>
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
                                         <select id="card_expiration_year" name="card_validate" class="form-control">
@@ -113,6 +128,7 @@ if ($user_data) {
                                                 <option value="<?=$i;?>"><?=$i;?></option>
                                             <?php endfor; ?>
                                         </select>
+                                        <span class="form-error hide">Este campo é obrigatório, não pode estar vazio.</span>
                                     </div>
                                 </div>
                             </div>
@@ -121,6 +137,7 @@ if ($user_data) {
                             <label class="col-xs-12 col-sm-2 control-label" for="card_cod">Código de segurança</label>
                             <div class="col-xs-12 col-sm-10">
                                 <input class="form-control code-card-mask" id="card_cod" name="card_cod" type="text">
+                                <span class="form-error hide">Este campo é obrigatório, não pode estar vazio.</span>
                             </div>
                         </div><!-- /.form-group -->
                         <div class="form-group display-none">
@@ -129,6 +146,7 @@ if ($user_data) {
                                 <select id="card_installments" name="card_installments" class="form-control">
                                     <option value="" disabled selected>Escolha o N° de parcelas</option>
                                 </select>
+                                <span class="form-error hide">Este campo é obrigatório, não pode estar vazio.</span>
                             </div>
                         </div>
                         <div class="form-group credit-total display-none">
@@ -137,16 +155,18 @@ if ($user_data) {
                                 <span id="card_total">R$ 00,00</span>
                             </div>
                         </div>
-                        <button class="btn-pagseguro --align-right" id="payment-credit-card">Concluir</button>
+                        <button class="btn-pagseguro btn-form --align-right" data-target-payment="credit" type="button">Concluir</button>
                     </form>
                 </div><!-- /.item-tab#credit-card -->
                 <div role="tabpanel" class="tab-pane" id="debit-online">
                     <h3 class="title-tab">Débito On-line</h3>
-                    <form class="form-horizontal clearfix" name="form-debit">
+                    <form class="form-horizontal form-validate clearfix" name="form-debit">
                         <div class="form-group">
                             <label class="col-xs-12 col-sm-2 control-label" for="card_cod">CPF/CNPJ</label>
                             <div class="col-xs-12 col-sm-10">
                                 <input class="form-control cpf-cnpj-mask" id="document-debit" name="document" type="text">
+                                <span class="form-error hide">Este campo é obrigatório, não pode estar vazio.</span>
+                                <span class="form-error custom-validate document-personal hide">O número do documento não é válido.</span>
                             </div>
                         </div><!-- /.form-group -->
                         <div class="form-group">
@@ -174,19 +194,21 @@ if ($user_data) {
                                 </label>
                             </div>
                         </div><!-- /.form-group -->
-                        <button class="btn-pagseguro --align-right" id="payment-debit">Concluir</button>
+                        <button class="btn-pagseguro btn-form --align-right" type="button" data-target-payment="debit">Concluir</button>
                     </form>
                 </div><!-- /.item-tab#debit-online -->
                 <div role="tabpanel" class="tab-pane" id="bilet">
                     <h3 class="title-tab">Boleto</h3>
-                    <form class="form-horizontal clearfix" name="form-bilit">
+                    <form class="form-horizontal form-validate clearfix" name="form-bilit">
                         <div class="form-group">
                             <label class="col-xs-12 col-sm-2 control-label" for="card_cod">CPF/CNPJ</label>
                             <div class="col-xs-12 col-sm-10">
                                 <input class="form-control cpf-cnpj-mask" id="document-boleto" name="document" type="text">
+                                <span class="form-error hide">Este campo é obrigatório, não pode estar vazio.</span>
+                                <span class="form-error custom-validate document-personal hide">O número do documento não é válido.</span>
                             </div>
                         </div>
-                        <button class="btn-pagseguro --align-right" id="payment-boleto">Concluir</button>
+                        <button class="btn-pagseguro btn-form --align-right" type="button" data-target-payment="billet">Concluir</button>
                     </form>
                     <ul class="list-warning">
                         <li>Imprima o boleto e pague no banco</li>
@@ -210,30 +232,189 @@ if ($user_data) {
 
         PagSeguroDirectPayment.setSessionId($('#session-code').attr('data-target'));
 
+        $(document).on("keypress", "form", function(event) {
+            return event.keyCode != 13;
+        });
+
+        $('.btn-form').click(function () {
+            var error = false;
+            var paymentType = $(this).data('target-payment');
+            var $form = $(this).parent('.form-validate');
+            var $fields = $form.find('.form-control');
+            $('.form-error').addClass('hide');
+
+            $fields.each(function () {
+                if(!$(this).val()){
+                    $(this).siblings('.form-error:not(".custom-validate")').removeClass('hide');
+                }
+                error = true;
+            });
+
+            /*
+             Validade Personal or Company Document
+            */
+            var $inputpersonal = $form.find('.form-control[name="document"]');
+            var documentPersonal = $inputpersonal.val();
+            var documentVal = documentPersonal.toString();
+
+            if(documentPersonal !== '' && (validateCpf(documentVal) === false|| validateCnpj(documentVal) === false)) {
+                console.log('vai validar');
+                $inputpersonal.siblings('.form-error').addClass('hide');
+                $inputpersonal.siblings('.form-error.document-personal').removeClass('hide');
+                error = true;
+            }
+
+            /*
+             Validate number credit card input
+             */
+
+            if(paymentType === 'credit') {
+                var $inputcard = $form.find('.form-control[name="card_num"]');
+                var carnumber = $inputcard.val();
+                if(carnumber!== '' && carnumber.length !== 19){
+                    $inputcard.siblings('.form-error').addClass('hide');
+                    $inputcard.siblings('.form-error.numbercard').removeClass('hide');
+                    error = true;
+                }
+
+                /*
+                 Validate birthday input
+                 */
+                var $inputdate = $form.find('.form-control[name="card_holder_birthdate"]');
+                var birthday = $inputdate.val();
+                if(birthday !== '' && birthday.length !== 10){
+                    $inputdate.siblings('.form-error').addClass('hide');
+                    $inputdate.siblings('.form-error.birthdate').removeClass('hide');
+                    error = true;
+                }
+            }
+
+
+            /*
+             Call payment type choice user
+             */
+            if(error === false) {
+                if(paymentType === 'credit') {
+                    creditPayment();
+                } else if (paymentType === 'debit') {
+                    debitPayment();
+                } else {
+                    billetPayment();
+                }
+            };
+        });
+
+        function validateCpf(str) {
+            str = str.replace('.','');
+            str = str.replace('.','');
+            str = str.replace('.','');
+            str = str.replace('-','');
+            str = str.replace('/','');
+            var strCPF = str;
+                var Soma;
+                var Resto;
+                Soma = 0;
+                if (strCPF == "00000000000") return false;
+
+                for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+                Resto = Soma % 11;
+
+                if ((Resto == 0) || (Resto == 1)) {
+                    Resto = 0;
+                } else {
+                    Resto = 11 - Resto;
+                };
+
+                if (Resto != parseInt(strCPF.substring(9, 10)) ) return false;
+
+                Soma = 0;
+                for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+                Resto = Soma % 11;
+
+                if ((Resto == 0) || (Resto == 1)) {
+                    Resto = 0;
+                } else {
+                    Resto = 11 - Resto;
+                };
+
+                if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
+                return true;
+
+        };
+
+        function validateCnpj(str) {
+            str = str.replace('.','');
+            str = str.replace('.','');
+            str = str.replace('.','');
+            str = str.replace('-','');
+            str = str.replace('/','');
+            var cnpj = str;
+            var numeros, digitos, soma, i, resultado, pos, tamanho, digitos_iguais;
+            digitos_iguais = 1;
+            if (cnpj.length < 14 && cnpj.length < 15)
+                return false;
+            for (i = 0; i < cnpj.length - 1; i++)
+                if (cnpj.charAt(i) != cnpj.charAt(i + 1))
+                {
+                    digitos_iguais = 0;
+                    break;
+                }
+            if (!digitos_iguais)
+            {
+                tamanho = cnpj.length - 2
+                numeros = cnpj.substring(0,tamanho);
+                digitos = cnpj.substring(tamanho);
+                soma = 0;
+                pos = tamanho - 7;
+                for (i = tamanho; i >= 1; i--)
+                {
+                    soma += numeros.charAt(tamanho - i) * pos--;
+                    if (pos < 2)
+                        pos = 9;
+                }
+                resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+                if (resultado != digitos.charAt(0))
+                    return false;
+                tamanho = tamanho + 1;
+                numeros = cnpj.substring(0,tamanho);
+                soma = 0;
+                pos = tamanho - 7;
+                for (i = tamanho; i >= 1; i--)
+                {
+                    soma += numeros.charAt(tamanho - i) * pos--;
+                    if (pos < 2)
+                        pos = 9;
+                }
+                resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+                if (resultado != digitos.charAt(1))
+                    return false;
+                return true;
+            }
+            else
+                return false;
+        };
+
         //Event buttons methods buy types
-        $('#payment-boleto').on('click', function(e){
-            e.preventDefault();
+        function creditPayment(){
             // load_elements('boleto') doesn't load bank and credit-card options.
             var elements = load_elements('boleto');
             set_session_code(elements.session_code);
             request_boleto(elements);
-        });
+        };
 
-        $('#payment-debit').on('click', function(e){
-            e.preventDefault();
+        function debitPayment(){
             // load_elements('debit', true) doesn't credit-card options only bank options.
             var elements = load_elements('debit', true);
             set_session_code(elements.session_code);
             request_debit(elements);
-        });
+        };
 
-        $('#payment-credit-card').on('click', function(e){
-            e.preventDefault();
+        function billetPayment(){
             // load_elements('credit-card', true, true) load all options.
             var elements = load_elements('credit-card', true, true);
             set_session_code(elements.session_code);
             request_cc_card(elements);
-        });
+        };
 
         function set_session_code(session_id) {
             PagSeguroDirectPayment.setSessionId(

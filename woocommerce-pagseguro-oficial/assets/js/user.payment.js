@@ -3,7 +3,7 @@ jQuery(function () {
     $(document)
         .ajaxStart(function () {
             $.blockUI({
-                message: null,
+                message: $('#loader'),
                 overlayCSS: {
                     background: '#fff', opacity: 0.6
                 }
