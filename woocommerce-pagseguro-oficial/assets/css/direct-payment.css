@@ -1810,49 +1810,103 @@ a.btn-pagseguro:focus {
 }
 
 /*==================================================================
+    Order-details
+==================================================================*/
+.order-info {
+    width: 100%;
+    border: 1px solid #363636;
+    margin-bottom: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.order-info > .title {
+    color: #FFF;
+    font-weight: bold;
+    display: block;
+    padding: 1em 0;
+    margin: 0 -15px 20px;
+    background-color: #363636;
+}
+
+.order-info > .item > .info-label {
+    font-weight: bold;
+}
+/*==================================================================
     Order-received
 ==================================================================*/
+.title-detail,
+.text-or {
+    text-align: center;
+}
+
 .title-detail {
     font-weight: bold;
     text-transform: uppercase;
     color: #333;
 }
 
-.title-order {
-    text-align: center;
-    color: #666;
-}
 .text-or {
+    position: relative;
     font-size: 12px;
-    margin: 15px 0;
+    margin: 30px 0;
+}
+
+.text-or::before,
+.text-or::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 8px;
+    width: 10%;
+    height: 1px;
+    background-color: #333;
+}
+
+.text-or::before {
+    left: 35%;
+}
+
+.text-or::after {
+    right: 35%;
 }
 
 /*==================================================================
-    Buttons
+    Action Bar
 ==================================================================*/
-.ps-button {
+.action-bar {
+    text-align: center;
+}
+
+.btn-action-order {
+    color: #363636;
     font-size: 14px;
     text-align: center;
-    color: #444;
-    padding: 8px 12px;
-    cursor: pointer;
-    float: right;
-    background: transparent;
-    border: 1px solid #30BB4A;
     outline: inherit;
-
+    cursor: pointer;
+    padding: 8px 12px;
+    box-shadow: none;
+    border: 1px solid #363636;
+    border-radius: 3px;
     -webkit-transition: background .15s linear, color .15s linear, box-shadow .10s ease;
     -moz-transition: background .15s linear, color .15s linear, box-shadow .10s ease;
     transition: background .15s linear, color .15s linear, box-shadow .10s ease;
+
+    /* over write defaul style tag <a> woocommerce*/
+    text-decoration: none!important;
+    box-shadow: none!important;
 }
 
-    .ps-button:hover,
-    .ps-button:focus {
-        text-decoration: none;
+    .btn-action-order:hover {
         color: #FFF!important;
-        background-color: #46CF60;
+        background-color: #363636;
+        text-decoration: none!important;
+        box-shadow: none!important;
     }
 
+.btn-action-order + .btn-action-order {
+    margin-left: 1em;
+}
 /*==================================================================
     Alert
 ==================================================================*/
