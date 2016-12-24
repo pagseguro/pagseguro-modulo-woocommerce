@@ -2,7 +2,7 @@ var WS = {
     'Ajax' : {
         'Direct' : {
             'Boleto': {
-                'Payment' : function (base_url, order_id, hash, document) {
+                'Payment' : function (base_url, order_id, hash, document, error) {
                     jQuery.ajax({
                         url: ajax_object.ajax_url+"?wc-pagseguro-ajax=true",
                         data: {
@@ -34,7 +34,7 @@ var WS = {
                             }));
                             jQuery(newForm).submit();
                         } else {
-                            //@todo show error message and redirect to shop
+                            error();
                         }
                     }).error(function(){
                         //@todo show error message and redirect to shop
@@ -42,7 +42,7 @@ var WS = {
                 }
             },
             'OnlineDebit': {
-                'Payment' : function (base_url, order_id, hash, document, bank) {
+                'Payment' : function (base_url, order_id, hash, document, bank, error) {
                     jQuery.ajax({
                         url: ajax_object.ajax_url+"?wc-pagseguro-ajax=true",
                         data: {
@@ -75,7 +75,7 @@ var WS = {
                             }));
                             jQuery(newForm).submit();
                         } else {
-                            //@todo show error message and redirect to shop
+                            error();
                         }
                     }).error(function(){
                         //@todo show error message and redirect to shop
@@ -127,7 +127,7 @@ var WS = {
                         //@todo show error message and redirect to shop
                     });
                 },
-                'Payment' : function (url, id, hash, document, token, international, quantity, amount, holderName, holderBirthdate) {
+                'Payment' : function (url, id, hash, document, token, international, quantity, amount, holderName, holderBirthdate, error) {
                     jQuery.ajax({
                         url: ajax_object.ajax_url+"?wc-pagseguro-ajax=true",
                         data: {
@@ -161,6 +161,7 @@ var WS = {
                             }))
                             jQuery(newForm).submit();
                         } else {
+                            error();
                             //@todo show error message and redirect to shop
                         }
                     }).error(function(){

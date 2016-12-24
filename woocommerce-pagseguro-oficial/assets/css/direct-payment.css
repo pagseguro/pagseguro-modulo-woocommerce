@@ -1819,29 +1819,17 @@ a.btn-pagseguro:focus {
 }
 
 .title-order {
+    text-align: center;
     color: #666;
 }
-
-.action-order {
-    font-size: 14px;
-    color: #333;;
-}
-
-.action-order:hover {
-    text-decoration: none;
-}
-
-.title-detail,
-.actions-toolbar{
-    text-align: center;
-}
-
 .text-or {
     font-size: 12px;
     margin: 15px 0;
 }
 
-/* buttons */
+/*==================================================================
+    Buttons
+==================================================================*/
 .ps-button {
     font-size: 14px;
     text-align: center;
@@ -1850,7 +1838,7 @@ a.btn-pagseguro:focus {
     cursor: pointer;
     float: right;
     background: transparent;
-    border: 1px solid #222;
+    border: 1px solid #30BB4A;
     outline: inherit;
 
     -webkit-transition: background .15s linear, color .15s linear, box-shadow .10s ease;
@@ -1860,20 +1848,14 @@ a.btn-pagseguro:focus {
 
     .ps-button:hover,
     .ps-button:focus {
-        color: #FFF;
-        background-color: #444;
+        text-decoration: none;
+        color: #FFF!important;
+        background-color: #46CF60;
     }
 
-.ps-button.ps-success {
-    background-color: #46CF60;
-}
-
-    .ps-button.ps-success:hover,
-    .ps-button.ps-success:focus {
-        background-color: #30BB4A;
-    }
-
-/* alert */
+/*==================================================================
+    Alert
+==================================================================*/
 .alert-danger {
     font-size: 12px;
     color: #FFF;
@@ -1881,7 +1863,9 @@ a.btn-pagseguro:focus {
     border-color: #EF1818;
 }
 
-/* form errors */
+/*==================================================================
+    Form Errors
+==================================================================*/
 .form-error {
     color: #FF2A2A;
 }

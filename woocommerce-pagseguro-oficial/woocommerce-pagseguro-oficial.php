@@ -193,7 +193,6 @@ if ( ! class_exists( 'WC_PagSeguro' )) :
      */
     add_action( 'wp_enqueue_scripts', function(){
         wp_enqueue_script( 'ajax-script', plugins_url( '/assets/js/direct-payment.js', __FILE__ ), array('jquery') );
-        wp_enqueue_script( 'user-script', plugins_url( '/assets/js/user.payment.js', __FILE__ ), array('jquery') );
         wp_localize_script( 'ajax-script', 'ajax_object',
             array( 'ajax_url' => plugins_url( 'classes/class-wc-pagseguro-ajax.php' , __FILE__ ) ));
     });
