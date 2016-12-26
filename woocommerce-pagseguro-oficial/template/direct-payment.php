@@ -28,7 +28,7 @@ if ($user_data) {
 ?>
 <section class="ps-wrap">
     <div id="loader">
-        <img src="<?= plugin_dir_url(__DIR__).'assets/images/load_blockui.gif'?>">
+        <span class="loader-icon"></span>
     </div>
     <section class="ps-tabs clearfix">
         <h2 class="title-payment">Finalizando sua compra com PagSeguro</h2>
