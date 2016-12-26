@@ -20,7 +20,7 @@
 $user_data = get_user_meta(get_current_user_id(), '_pagseguro_data');
 if ($user_data) {
     $user_data = end($user_data);
-    delete_user_meta(get_current_user_id(), '_pagseguro_data');
+//    delete_user_meta(get_current_user_id(), '_pagseguro_data');
 } else {
     echo "<script>window.location = history.back(-1);</script>";
 }
@@ -545,7 +545,13 @@ if ($user_data) {
                 klength = 0,
                 klastLength = 0,
                 kunMasked;
-            $('#card_num').on('keyup', function () {
+            $('#card_num').on('keyup', function (event) {
+                var key = event.which;
+
+                if(!(key >= 48 && key <= 57)) {
+                    return false;
+                }
+
                 klastLength = klength;
                 klength = $(this).val().length;
                 //6 number + space of mask
