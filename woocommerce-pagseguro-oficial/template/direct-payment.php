@@ -577,7 +577,9 @@ if ($user_data) {
         }());
 
         function unmaskField($el, val) {
-            var val = val || true;
+            if(val === undefined) {
+                val = true
+            }
             try {
                 if (val === true) {
                     var $el = $el.val();

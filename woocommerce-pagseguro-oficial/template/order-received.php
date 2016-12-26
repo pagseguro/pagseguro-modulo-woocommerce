@@ -2,7 +2,6 @@
     <h1 class="title-detail">Detalhes do Pedido</h1>
     <?php
         $order = wc_get_order($_REQUEST['order_id']);
-        print_r($order);
         $public_view_order_url = esc_url( $order->get_view_order_url() );
         $shop_url = get_permalink( get_option( 'woocommerce_shop_page_id' ) );
     ?>
@@ -23,7 +22,7 @@
 
     <?php if ($_REQUEST['checkout_type'] == 'debit'): ?>
         <div class="text-center">
-            <a class="btn-action" target="_blank" href="<?= $_REQUEST['payment_link'];?>">
+            <a class="btn-action-order" target="_blank" href="<?= $_REQUEST['payment_link'];?>">
                 Ir para o site do banco
             </a>
         </div>
