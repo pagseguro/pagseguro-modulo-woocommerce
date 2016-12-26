@@ -36,7 +36,7 @@ if ($user_data) {
             <h2 class="title-payment">Formas de pagamento</h2>
             <div class="alert alert-danger hide" id="ps-alert-error" role="alert" data-redirect="<?php echo get_permalink( get_option( 'woocommerce_shop_page_id' ) ); ?>">
                 <strong>Ops!</strong>
-                Aconteceu um erro, por favor contate o administrador do sistema e você será re-direcionado para a página
+                Aconteceu um erro, por favor contate o administrador do sistema e você será redirecionado para a página
                 inicial.
             </div>
             <h4 class="method-payment">Escolha o método</h4>

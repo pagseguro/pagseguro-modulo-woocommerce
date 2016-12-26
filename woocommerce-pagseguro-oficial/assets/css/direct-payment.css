@@ -1875,7 +1875,6 @@ a.btn-pagseguro:focus {
     Order-received
 ==================================================================*/
 .total-price {
-    text-align: right;
     padding-right: 5px!important;
 }
 .title-detail,
