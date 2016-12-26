@@ -1560,6 +1560,22 @@ a.badge:focus {
     box-sizing: border-box;
 }
 
+@media screen and (min-width: 30em) {
+    .ps-wrap {
+        font-size: 18px;
+        font-size: 1.25rem;
+    }
+}
+
+@media screen and (min-width: 48em) {
+    .ps-wrap {
+        font-size: 16px;
+        font-size: 1rem;
+    }
+}
+
+
+
 /*==================================================================
     Tabs Components Styles
 ==================================================================*/
@@ -1798,11 +1814,32 @@ a.btn-pagseguro:focus {
 }
 
 /* loader */
+@-webkit-keyframes spin{100%{-webkit-transform:rotate(360deg)}}@-moz-keyframes spin{100%{-moz-transform:rotate(360deg)}}@keyframes spin{100%{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);-o-transform:rotate(360deg);transform:rotate(360deg)}}
 #loader {
     display: none;
     position: absolute;
     left: 0;
     right: 0;
+}
+
+.loader-icon {
+    -webkit-animation:spin 1s ease-in-out infinite;
+    -moz-animation:spin 1s ease-in-out infinite;
+    animation:spin 1s ease-in-out infinite;
+    height:1em;
+    width:1em;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:-.5em;
+    margin-top:-.5em;
+    display:block;
+    background:url('../images/loader.svg') center center;
+    background-size:cover;
+    line-height:1;
+    text-align:center;
+    font-size:2em;
+    color:rgba(0,0,0,.75);
 }
 
 .blockMsg {
@@ -1813,6 +1850,7 @@ a.btn-pagseguro:focus {
     Order-details
 ==================================================================*/
 .order-info {
+    font-size: 14px;
     width: 100%;
     border: 1px solid #363636;
     margin-bottom: 30px;
@@ -1822,6 +1860,7 @@ a.btn-pagseguro:focus {
 
 .order-info > .title {
     color: #FFF;
+    font-size: 2em;
     font-weight: bold;
     display: block;
     padding: 1em 0;
@@ -1829,12 +1868,18 @@ a.btn-pagseguro:focus {
     background-color: #363636;
 }
 
-.order-info > .item > .info-label {
+.order-info .item .info-label {
     font-weight: bold;
+}
+.order-info .item .info-label a {
+    cursor: pointer;
 }
 /*==================================================================
     Order-received
 ==================================================================*/
+.total-price {
+    padding-right: 5px!important;
+}
 .title-detail,
 .text-or {
     text-align: center;
@@ -1842,8 +1887,8 @@ a.btn-pagseguro:focus {
 
 .title-detail {
     font-weight: bold;
-    text-transform: uppercase;
     color: #333;
+    margin: 0 0 1em!important;
 }
 
 .text-or {

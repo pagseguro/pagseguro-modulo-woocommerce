@@ -11,11 +11,4 @@ jQuery(document).ready(function () {
         })
         .ajaxStop($.unblockUI);
 
-    // $.blockUI({
-    //     message: $('#loader'),
-    //     overlayCSS: {
-    //         background: '#fff', opacity: 0.6
-    //     }
-    // })
-
 });

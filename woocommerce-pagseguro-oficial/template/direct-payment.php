@@ -20,15 +20,15 @@
 $user_data = get_user_meta(get_current_user_id(), '_pagseguro_data');
 if ($user_data) {
     $user_data = end($user_data);
-//    delete_user_meta(get_current_user_id(), '_pagseguro_data');
+    delete_user_meta(get_current_user_id(), '_pagseguro_data');
 } else {
-//    echo "<script>window.location = history.back(-1);</script>";
+    echo "<script>window.location = history.back(-1);</script>";
 }
 
 ?>
 <section class="ps-wrap">
     <div id="loader">
-        <img src="<?= plugin_dir_url(__DIR__).'assets/images/load_blockui.gif'?>">
+        <span class="loader-icon"></span>
     </div>
     <section class="ps-tabs clearfix">
         <h2 class="title-payment">Finalizando sua compra com PagSeguro</h2>
@@ -36,7 +36,7 @@ if ($user_data) {
             <h2 class="title-payment">Formas de pagamento</h2>
             <div class="alert alert-danger hide" id="ps-alert-error" role="alert" data-redirect="<?php echo get_permalink( get_option( 'woocommerce_shop_page_id' ) ); ?>">
                 <strong>Ops!</strong>
-                Aconteceu um erro, por favor contate o administrador do sistema e você será re-direcionado para a página
+                Aconteceu um erro, por favor contate o administrador do sistema e você será redirecionado para a página
                 inicial.
             </div>
             <h4 class="method-payment">Escolha o método</h4>
