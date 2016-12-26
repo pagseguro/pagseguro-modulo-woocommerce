@@ -2,9 +2,9 @@
     <h1 class="title-detail">Detalhes do Pedido</h1>
     <?php
         $order = wc_get_order($_REQUEST['order_id']);
-//        print_r($order);
+        print_r($order);
         $public_view_order_url = esc_url( $order->get_view_order_url() );
-        $shop_url = get_site_url();
+        $shop_url = get_permalink( get_option( 'woocommerce_shop_page_id' ) );
     ?>
     <div class="order-info">
         <h2 class="title text-center">Seu pedido foi efetuado com sucesso</h2>
