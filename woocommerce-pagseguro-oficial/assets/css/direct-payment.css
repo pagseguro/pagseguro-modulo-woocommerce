@@ -1871,6 +1871,9 @@ a.btn-pagseguro:focus {
 .order-info .item .info-label {
     font-weight: bold;
 }
+.order-info .item .info-label a {
+    cursor: pointer;
+}
 /*==================================================================
     Order-received
 ==================================================================*/
