@@ -1560,6 +1560,22 @@ a.badge:focus {
     box-sizing: border-box;
 }
 
+@media screen and (min-width: 30em) {
+    .ps-wrap {
+        font-size: 18px;
+        font-size: 1.25rem;
+    }
+}
+
+@media screen and (min-width: 48em) {
+    .ps-wrap {
+        font-size: 16px;
+        font-size: 1rem;
+    }
+}
+
+
+
 /*==================================================================
     Tabs Components Styles
 ==================================================================*/
@@ -1822,6 +1838,7 @@ a.btn-pagseguro:focus {
 
 .order-info > .title {
     color: #FFF;
+    font-size: 2em;
     font-weight: bold;
     display: block;
     padding: 1em 0;
@@ -1844,6 +1861,7 @@ a.btn-pagseguro:focus {
     font-weight: bold;
     text-transform: uppercase;
     color: #333;
+    margin: 0 0 1em!important;
 }
 
 .text-or {

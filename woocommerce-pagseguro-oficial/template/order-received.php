@@ -1,4 +1,4 @@
-<section class="checkout-success">
+<section class="ps-wrap checkout-success">
     <h1 class="title-detail">Detalhes do Pedido</h1>
     <?php
         $order = wc_get_order($_REQUEST['order_id']);
