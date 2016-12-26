@@ -20,9 +20,9 @@
 $user_data = get_user_meta(get_current_user_id(), '_pagseguro_data');
 if ($user_data) {
     $user_data = end($user_data);
-//    delete_user_meta(get_current_user_id(), '_pagseguro_data');
+    delete_user_meta(get_current_user_id(), '_pagseguro_data');
 } else {
-//    echo "<script>window.location = history.back(-1);</script>";
+    echo "<script>window.location = history.back(-1);</script>";
 }
 
 ?>
