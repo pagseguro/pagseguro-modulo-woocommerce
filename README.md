@@ -13,7 +13,7 @@ Com o módulo instalado e configurado, você pode pode oferecer o PagSeguro como
 Requisitos
 ----------
 ---
- - [WordPress] 3.5.2
+ - [WordPress] 3.8+
  - [WooCommerce] 2.1+
  - [PHP] 5.4.27
  - [SimpleXml]
@@ -65,6 +65,9 @@ Inputs
 Changelog
 ---------
 ---
+1.4.0
+ - Implementado checkout transparente (boleto, debito online e cartão de crédito)
+ 
 1.3.0
  - Implementado conciliação e cancelamento.
 
