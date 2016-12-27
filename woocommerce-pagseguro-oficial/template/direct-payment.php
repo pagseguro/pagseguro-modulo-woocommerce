@@ -261,14 +261,12 @@ if ($user_data) {
             var documentVal = documentPersonal.toString();
 
             if(documentPersonal !== '') {
-                if(documentPersonal.length === 14 && validateCpf(documentVal) === false) {
+                if(documentPersonal.length <= 14 && validateCpf(documentVal) === false) {
                     $inputpersonal.siblings('.form-error').addClass('hide');
                     $inputpersonal.siblings('.form-error.document-personal').removeClass('hide');
                     error = true;
                     return;
-                }
-
-                if(documentPersonal.length == 19 && validateCnpj(documentVal) === false) {
+                } else if (documentPersonal.length > 14 && documentPersonal.length <= 18 && validateCnpj(documentVal) === false) {
                     $inputpersonal.siblings('.form-error').addClass('hide');
                     $inputpersonal.siblings('.form-error.document-personal').removeClass('hide');
                     error = true;
@@ -328,34 +326,58 @@ if ($user_data) {
             str = str.replace('.','');
             str = str.replace('-','');
             var strCPF = str;
-            var Soma;
-            var Resto;
-            Soma = 0;
-            if (strCPF == "00000000000") return false;
+            var sum;
+            var rest;
+            sum = 0;
 
-            for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
-            Resto = Soma % 11;
+            var equal_digits = 1;
 
-            if ((Resto == 0) || (Resto == 1)) {
-                Resto = 0;
+            for (i = 0; i < strCPF.length - 1; i++) {
+                if (strCPF.charAt(i) != strCPF.charAt(i + 1))
+                {
+                    equal_digits = 0;
+                    break;
+                }
+            }
+
+            if (!equal_digits) {
+                for (var i = 1; i <= 9; i++) {
+                    sum = sum + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+                }
+
+                rest = sum % 11;
+
+                if ((rest == 0) || (rest == 1)) {
+                    rest = 0;
+                } else {
+                    rest = 11 - rest;
+                };
+
+                if (rest != parseInt(strCPF.substring(9, 10)) ) {
+                    return false;
+                }
+
+                sum = 0;
+                for (i = 1; i <= 10; i++) {
+                    sum = sum + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+                }
+
+                rest = sum % 11;
+
+                if ((rest == 0) || (rest == 1)) {
+                    rest = 0;
+                } else {
+                    rest = 11 - rest;
+                };
+
+                if (rest != parseInt(strCPF.substring(10, 11) ) ) {
+                    return false;
+                }
+                return true;
+
             } else {
-                Resto = 11 - Resto;
-            };
-
-            if (Resto != parseInt(strCPF.substring(9, 10)) ) return false;
-
-            Soma = 0;
-            for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
-            Resto = Soma % 11;
-
-            if ((Resto == 0) || (Resto == 1)) {
-                Resto = 0;
-            } else {
-                Resto = 11 - Resto;
-            };
-
-            if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
-            return true;
+                return false;
+            }
         };
 
         function validateCnpj(str) {
@@ -365,49 +387,64 @@ if ($user_data) {
             str = str.replace('-','');
             str = str.replace('/','');
             var cnpj = str;
-            var numeros, digitos, soma, i, resultado, pos, tamanho, digitos_iguais;
-            digitos_iguais = 1;
-            if (cnpj.length < 14 && cnpj.length < 15)
+            var numbersVal;
+            var digits;
+            var sum;
+            var i;
+            var result;
+            var pos;
+            var size;
+            var equal_digits;
+
+            equal_digits = 1;
+
+            if (cnpj.length < 14 && cnpj.length < 15) {
                 return false;
-            for (i = 0; i < cnpj.length - 1; i++)
+            }
+
+            for (i = 0; i < cnpj.length - 1; i++) {
                 if (cnpj.charAt(i) != cnpj.charAt(i + 1))
                 {
-                    digitos_iguais = 0;
+                    equal_digits = 0;
                     break;
                 }
-            if (!digitos_iguais)
-            {
-                tamanho = cnpj.length - 2
-                numeros = cnpj.substring(0,tamanho);
-                digitos = cnpj.substring(tamanho);
-                soma = 0;
-                pos = tamanho - 7;
-                for (i = tamanho; i >= 1; i--)
-                {
-                    soma += numeros.charAt(tamanho - i) * pos--;
-                    if (pos < 2)
-                        pos = 9;
-                }
-                resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
-                if (resultado != digitos.charAt(0))
-                    return false;
-                tamanho = tamanho + 1;
-                numeros = cnpj.substring(0,tamanho);
-                soma = 0;
-                pos = tamanho - 7;
-                for (i = tamanho; i >= 1; i--)
-                {
-                    soma += numeros.charAt(tamanho - i) * pos--;
-                    if (pos < 2)
-                        pos = 9;
-                }
-                resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
-                if (resultado != digitos.charAt(1))
-                    return false;
-                return true;
             }
-            else
+
+
+            if (!equal_digits) {
+                size = cnpj.length - 2
+                numbersVal = cnpj.substring(0,size);
+                digits = cnpj.substring(size);
+                sum = 0;
+                pos = size - 7;
+                for (i = size; i >= 1; i--)
+                {
+                    sum += numbersVal.charAt(size - i) * pos--;
+                    if (pos < 2)
+                        pos = 9;
+                }
+                result = sum % 11 < 2 ? 0 : 11 - sum % 11;
+                if (result != digits.charAt(0))
+                    return false;
+                size = size + 1;
+                numbersVal = cnpj.substring(0,size);
+                sum = 0;
+                pos = size - 7;
+                for (i = size; i >= 1; i--)
+                {
+                    sum += numbersVal.charAt(size - i) * pos--;
+                    if (pos < 2)
+                        pos = 9;
+                }
+                result = sum % 11 < 2 ? 0 : 11 - sum % 11;
+                if (result != digits.charAt(1)) {
+                    return false;
+                }
+
+                return true;
+            } else {
                 return false;
+            }
         };
 
         function errorPaymentProcess() {
@@ -541,10 +578,10 @@ if ($user_data) {
         };
 
         (function() {
-            var kbinValue,
-                klength = 0,
-                klastLength = 0,
-                kunMasked;
+            var binValue,
+                lengthValue = 0,
+                lastLength = 0,
+                unMasked;
             $('#card_num').on('keyup', function (event) {
                 var key = event.which;
 
@@ -552,13 +589,13 @@ if ($user_data) {
                     return false;
                 }
 
-                klastLength = klength;
-                klength = $(this).val().length;
+                lastLength = lengthValue;
+                lengthValue = $(this).val().length;
                 //6 number + space of mask
-                if (klength == 7 && klastLength <= 7) {
-                    kunMasked = unmaskField($(this).val(), false);
-                    kbinValue = kunMasked.substring(0,6);
-                    get_card_brand(kbinValue);
+                if (lengthValue == 7 && lastLength <= 7) {
+                    unMasked = unmaskField($(this).val(), false);
+                    binValue = unMasked.substring(0,6);
+                    get_card_brand(binValue);
                 }
             });
         }());
