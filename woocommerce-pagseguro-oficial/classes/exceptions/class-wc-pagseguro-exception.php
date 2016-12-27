@@ -21,21 +21,10 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-if ( ! class_exists('WC_PagSeguro_Setup')):
-    
-    class WC_PagSeguro_Setup 
+if ( ! class_exists('WC_PagSeguro_Exception')):
+
+    class WC_PagSeguro_Exception extends Exception
     {
-        /**
-         * When plugin is activated
-         */
-        public static function plugin_activated()
-        {
-            $pages = new WC_PagSeguro_Pages();
-            $page_id = $pages->create_pagseguro_page();
-            $pages->create_pagseguro_checkout_page($page_id);
-            $pages->create_pagseguro_direct_payment_checkout_page($page_id);
-            $pages->create_pagseguro_order_confirmation_checkout_page($page_id);
-        }
     }
 
 endif;

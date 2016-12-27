@@ -5,7 +5,7 @@
  * Description: Gateway de pagamento PagSeguro para WooCommerce.
  * Author: PagSeguro Internet LTDA.
  * Author URI: https://pagseguro.uol.com.br/v2/guia-de-integracao/downloads.html#!Modulos
- * Version: 1.1.0
+ * Version: 1.4.0
  * License: GPLv2 or later
  * Text Domain: woocommerce-pagseguro-oficial
  * Domain Path: languages/
@@ -27,7 +27,7 @@ if ( ! class_exists( 'WC_PagSeguro' )) :
          *
          * @var string
          */
-        const VERSION = '1.3.0';
+        const VERSION = '1.4.0';
 
         /**
          * Instance of this class.
@@ -97,13 +97,15 @@ if ( ! class_exists( 'WC_PagSeguro' )) :
          */
         private function requires() {
             require_once 'library/vendor/autoload.php';
-            require_once 'classes/class-wc-pagseguro-api.class.php';
-            require_once 'classes/class-wc-pagseguro-gateway.class.php';
-            require_once 'classes/class-wc-pagseguro-model.class.php';
+            require_once 'classes/exceptions/class-wc-pagseguro-exception.php';
+            require_once 'classes/class-wc-pagseguro-api.php';
+            require_once 'classes/class-wc-pagseguro-gateway.php';
+            require_once 'classes/class-wc-pagseguro-model.php';
             require_once 'classes/class-wc-pagseguro-shortcodes.php';
             require_once 'classes/class-wc-pagseguro-admin.php';
             require_once 'classes/class-wc-pagseguro-status.php';
             require_once 'classes/class-wc-pagseguro-payload.php';
+            require_once 'classes/class-wc-pagseguro-direct-payment.php';
             require_once 'classes/admin/class-wc-pagseguro-methods.php';
             require_once 'classes/admin/class-wc-pagseguro-conciliation.php';
             require_once 'classes/admin/class-wc-pagseguro-cancel.php';
@@ -169,26 +171,59 @@ if ( ! class_exists( 'WC_PagSeguro' )) :
     add_action( 'plugins_loaded', array( 'WC_PagSeguro', 'get_instance' ) );
 
     /**
-    * Insert Scripts PagSeguroLib to need in the <head> tag
-    **/
-    function template_scripts(){
-        $handle = 'data-table-styles';
-        $src = plugins_url('woocommerce-pagseguro-oficial/assets/css/jquery.dataTables.css');
-        $deps = '';
-        $ver = '1';
-        $media = 'screen';
-        wp_enqueue_style($handle, $src, $deps, $ver, $media);
-    };
-    add_action('admin_enqueue_scripts', 'template_scripts');
-
-
-    /**
-    * Insert Modal Markup in the top markup page
-    **/
+     * Insert Modal Markup in the top markup page
+     **/
     function template_modals() {
         include 'template/admin/modals.php';
     };
     add_action('admin_head', 'template_modals');
+
+    /**
+     * Include dataTables styles
+     */
+    add_action('admin_enqueue_scripts', function(){
+        wp_enqueue_style(
+            'dataTable-styles',
+            plugins_url('/assets/css/jquery.dataTables.css', __FILE__), '', 1, 'screen'
+        );
+    });
+
+    /**
+     * Include ajax object
+     */
+    add_action( 'wp_enqueue_scripts', function(){
+        wp_enqueue_script( 'ajax-script', plugins_url( '/assets/js/direct-payment.js', __FILE__ ), array('jquery') );
+        wp_localize_script( 'ajax-script', 'ajax_object',
+            array( 'ajax_url' => plugins_url( 'classes/class-wc-pagseguro-ajax.php' , __FILE__ ) ));
+    });
+
+    /**
+     * Include bootstrap to front-end
+     */
+    add_action('wp_enqueue_scripts', function(){
+        wp_enqueue_script(
+            'bootstrap-script',
+            plugins_url( '/assets/js/vendor/bootstrap.min.js', __FILE__ ), array('jquery')
+        );
+        wp_enqueue_style(
+            'bootstrap-styles',
+            plugins_url('/assets/css/vendor/bootstrap.min.css', __FILE__)
+        );
+    });
+
+    /**
+     * Direct payment styles
+     */
+    add_action('wp_enqueue_scripts', function (){
+        wp_enqueue_style(
+            'font-awesome-styles',
+            plugins_url('/assets/css/vendor/font-awesome.min.css', __FILE__)
+        );
+        wp_enqueue_style(
+            'direct-payment-styles',
+            plugins_url('/assets/css/direct-payment.css', __FILE__)
+        );
+    });
 
     /**
      *  Call actions for notification
