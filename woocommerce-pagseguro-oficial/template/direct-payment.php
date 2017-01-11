@@ -141,6 +141,7 @@ if ($user_data) {
                                 <span class="form-error hide">Este campo é obrigatório, não pode estar vazio.</span>
                             </div>
                         </div><!-- /.form-group -->
+
                         <div class="form-group display-none">
                             <label class="col-xs-12 col-sm-2 control-label" for="card_installments">Parcelas</label>
                             <div class="col-xs-12 col-sm-10">
@@ -155,6 +156,11 @@ if ($user_data) {
                             <div class="col-xs-12 col-sm-10">
                                 <span id="card_total">R$ 00,00</span>
                             </div>
+                        </div>
+                        <div class="form-group" align="right">
+                            <label class="col-xs-12 col-sm-12">
+                                Esta compra está sendo feita no Brasil <img src="<?=plugin_dir_url(__DIR__).'flag-origin-country.png' ?>"
+                            </label>
                         </div>
                         <button class="btn-pagseguro btn-form --align-right" data-target-payment="credit" type="button">Concluir</button>
                     </form>
@@ -196,6 +202,12 @@ if ($user_data) {
                             </div>
                             <span class="form-error hide">A opção de banco não pode estar vazia, escolha uma das opções acima.</span>
                         </div><!-- /.form-group -->
+
+                        <div class="form-group" align="right">
+                            <label class="col-xs-12 col-sm-12">
+                                Esta compra está sendo feita no Brasil <img src="<?=plugin_dir_url(__DIR__).'flag-origin-country.png' ?>"
+                            </label>
+                        </div>
                         <button class="btn-pagseguro btn-form --align-right" type="button" data-target-payment="debit">Concluir</button>
                     </form>
                 </div><!-- /.item-tab#debit-online -->
@@ -209,6 +221,11 @@ if ($user_data) {
                                 <span class="form-error hide">Este campo é obrigatório, não pode estar vazio.</span>
                                 <span class="form-error custom-validate document-personal hide">O número do documento não é válido.</span>
                             </div>
+                        </div>
+                        <div class="form-group" align="right">
+                            <label class="col-xs-12 col-sm-12">
+                                Esta compra está sendo feita no Brasil <img src="<?=plugin_dir_url(__DIR__).'flag-origin-country.png' ?>"
+                            </label>
                         </div>
                         <button class="btn-pagseguro btn-form --align-right" type="button" data-target-payment="billet">Concluir</button>
                     </form>
