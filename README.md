@@ -123,9 +123,9 @@ Achou e corrigiu um bug ou tem alguma feature em mente e deseja contribuir?
 * Envie um pull request no [GitHub].
 
 
-  [API de Pagamentos]: https://pagseguro.uol.com.br/v2/guia-de-integracao/api-de-pagamentos.html
+  [API de Pagamentos]: https://dev.pagseguro.uol.com.br/documentacao/pagamentos
   [API de Notificações]: https://pagseguro.uol.com.br/v2/guia-de-integracao/api-de-notificacoes.html
-  [Dúvidas?]: https://pagseguro.uol.com.br/desenvolvedor/comunidade.jhtml
+  [Dúvidas?]: https://comunidade.pagseguro.uol.com.br/hc/pt-br/community/topics
   [Pagamentos via API]: https://pagseguro.uol.com.br/integracao/pagamentos-via-api.jhtml
   [Notificação de Transações]: https://pagseguro.uol.com.br/integracao/notificacao-de-transacoes.jhtml
   [WordPress]: http://wordpress.org/
@@ -135,4 +135,5 @@ Achou e corrigiu um bug ou tem alguma feature em mente e deseja contribuir?
   [cURL]: http://php.net/manual/en/book.curl.php
   [DOM]: http://php.net/manual/en/book.dom.php
   [GitHub]: https://github.com/pagseguro/woocommerce
+  [SimpleXml]: http://php.net/manual/en/book.simplexml.php
 
