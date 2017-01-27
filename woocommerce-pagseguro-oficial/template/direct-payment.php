@@ -243,7 +243,7 @@ if ($user_data) {
 <input type="hidden" id="order" data-target="<?=$user_data['order_id'] ?>"/>
 <input type="hidden" id="session-code" data-target="<?=$user_data['session_code'] ?>"/>
 
-<script type="text/javascript" src="<?= plugin_dir_url(__DIR__).'assets/js/vendor/jquery.mask.min.js'; ?>"></script>
+<script type="text/javascript" src="<?= plugin_dir_url(__DIR__).'assets/js/vendor/vanilla-masker.min.js'; ?>"></script>
 <script type="text/javascript" src="<?= plugin_dir_url(__DIR__).'assets/js/direct-payment.js'; ?>"></script>
 <script type="text/javascript" src="<?= $user_data['js']; ?>"></script>
 <script type="text/javascript" src="<?= plugin_dir_url(__DIR__).'assets/js/user.payment.js'; ?>"></script>
@@ -619,20 +619,18 @@ if ($user_data) {
 
         // Masks functions
         (function masksInputs() {
-            $('.cpf-mask').mask('000.000.000-00');
-            $('.cnpj-mask').mask('00.000.000/0000-00');
-            $('.credit-card-mask').mask('0000 0000 0000 0000');
-            $('.code-card-mask').mask('000');
-            $('.date-mask').mask('00/00/0000', { placeholder: "__/__/____" });
+            VMasker(document.querySelector('.credit-card-mask')).maskPattern('9999 9999 9999 9999');
+            VMasker(document.querySelector('.code-card-mask')).maskPattern('999');
+            VMasker(document.querySelector('.date-mask')).maskPattern('99/99/9999');
             $('.cpf-cnpj-mask').on('keyup', function() {
                 try {
-                    $(this).unmask();
+                    VMasker($(this)).unMask();
                 } catch(e) {
                     alert('Ops, algo deu errado!');
                 };
                 var isLength = $(this).val().length;
                 //9 is number optional, is fake the transtion two types mask
-                isLength <= 11 ? $(this).mask('000.000.000-009') : $(this).mask('00.000.000/0000-00');
+                isLength <= 11 ?  VMasker($(this)).maskPattern('999.999.999-999') : VMasker($(this)).maskPattern('99.999.999/9999-99');
             });
         }());
 
