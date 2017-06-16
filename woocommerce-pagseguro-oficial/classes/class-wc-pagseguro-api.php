@@ -87,9 +87,11 @@ class WC_PagSeguro_Api
             sprintf('%s %s', $order->billing_first_name,  $order->billing_last_name)
         );
         $request->setSender()->setEmail($order->billing_email);
+
+        $billing_phone = $this->sanitize_phone($order->billing_phone);
         $request->setSender()->setPhone()->withParameters(
-            substr( $order->billing_phone, 0, 2 ),
-            substr( $order->billing_phone, 2 )
+            substr( $billing_phone, 0, 2 ),
+            substr( $billing_phone, 2 )
         );
 
         $request->setNotificationUrl($this->get_notification_url());
@@ -329,9 +331,11 @@ class WC_PagSeguro_Api
             $order->billing_email = "woocommerce@sandbox.pagseguro.com.br";
         }
         $request->setSender()->setEmail($order->billing_email);
+
+        $billing_phone = $this->sanitize_phone($order->billing_phone);
         $request->setSender()->setPhone()->withParameters(
-            substr( $order->billing_phone, 0, 2 ),
-            substr( $order->billing_phone, 2 )
+            substr( $billing_phone, 0, 2 ),
+            substr( $billing_phone, 2 )
         );
 
         $request->setSender()->setHash($data['sender_hash']);
@@ -353,10 +357,13 @@ class WC_PagSeguro_Api
         // Set the credit card holder information
         $request->setHolder()->setBirthdate($data['holder_birthdate']);
         $request->setHolder()->setName(preg_replace('/( )+/', ' ',$data['holder_name'])); // Equals in Credit Card
+
+        $billing_phone = $this->sanitize_phone($order->billing_phone);
         $request->setHolder()->setPhone()->withParameters(
-            substr( $order->billing_phone, 0, 2 ),
-            substr( $order->billing_phone, 2 )
+            substr( $billing_phone, 0, 2 ),
+            substr( $billing_phone, 2 )
         );
+
         $request->setHolder()->setDocument()->withParameters(
             (strlen($data['sender_document']) <= 11) ? 'CPF' : 'CNPJ',
             $data['sender_document']
