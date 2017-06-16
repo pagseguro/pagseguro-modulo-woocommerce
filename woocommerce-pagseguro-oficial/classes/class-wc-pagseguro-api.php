@@ -475,4 +475,16 @@ class WC_PagSeguro_Api
     {
         return $this->settings['url_redirect'];
     }
+
+
+    /**
+     * Extract numeric chars from phone_number
+     *
+     * @return string
+     */
+
+    private function sanitize_phone($phone)
+    {
+        return preg_replace('/[^0-9]/', null, $phone);
+    }
 }
