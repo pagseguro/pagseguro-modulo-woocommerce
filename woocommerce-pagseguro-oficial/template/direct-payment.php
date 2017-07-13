@@ -609,12 +609,16 @@ if ($user_data) {
                 lastLength = lengthValue;
                 lengthValue = $(this).val().length;
                 //6 number + space of mask
-                if (lengthValue == 7 && lastLength <= 7) {
+            });
+            $('#card_num').on('blur', function () {
+                var lenght = $(this).val().length;
+                if (lenght >= 12){
                     unMasked = unmaskField($(this).val(), false);
                     binValue = unMasked.substring(0,6);
                     get_card_brand(binValue);
                 }
-            });
+                //
+            })
         }());
 
         // Masks functions

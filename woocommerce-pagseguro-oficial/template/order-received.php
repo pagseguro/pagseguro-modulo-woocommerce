@@ -66,13 +66,30 @@
             </tfoot>
         </table>
     </div>
-    <?php if ($_REQUEST['checkout_type'] == 'boleto'): ?>
+    <?php if ($_REQUEST['link_boleto']): ?>
+        <div class="text-center">
+            <p>Se a página de impressão do boleto não abriu, clique no link abaixo</p>
+            <a class="btn-action-order -center" target="_blank" href="<?= $_REQUEST['link_boleto'];?>">
+                Imprimir boleto
+            </a>
+        </div>
+    <?php endif; ?>
+    <?php if ($_REQUEST['link_debit']): ?>
+        <div class="text-center">
+            <p>Se a tela de pagamento não abriu clique no link abaixo</p>
+            <a class="btn-action-order -center" target="_blank" href="<?= $_REQUEST['link_debit'];?>">
+                Ir para o site do banco
+            </a>
+        </div>
+    <?php endif; ?>
+
+	<?php if ($_REQUEST['checkout_type'] == 'boleto'): ?>
         <div class="text-center">
             <a class="btn-action-order -center" target="_blank" href="<?= $_REQUEST['payment_link'];?>">
                 Imprimir boleto
             </a>
         </div>
-    <?php endif; ?>
+	<?php endif; ?>
 
     <?php if ($_REQUEST['checkout_type'] == 'debit'): ?>
         <div class="text-center">
