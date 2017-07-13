@@ -14,28 +14,13 @@ var WS = {
                         type: 'POST'
                     }).success(function (response) {
                         response = JSON.parse(response);
-                        if (response.success) {
-                            var newForm = jQuery('<form>', {
-                                'action': response.payload.data.url,
-                                'target': '_top',
-                                'method': 'POST'
-                            }).append(jQuery('<input>', {
-                                'name': 'payment_link',
-                                'value': response.payload.data.payment_link,
-                                'type': 'hidden'
-                            })).append(jQuery('<input>', {
-                                'name': 'checkout_type',
-                                'value': 'boleto',
-                                'type': 'hidden'
-                            })).append(jQuery('<input>', {
-                                'name': 'order_id',
-                                'value': response.payload.data.order_id,
-                                'type': 'hidden'
-                            }));
-                            jQuery(newForm).submit();
-                        } else {
-                            error();
-                        }
+                        var link = response.payload.data.payment_link;
+                        var redirect = response.payload.data.url + '?order_id=' + response.payload.data.order_id + '&link_boleto=' + link;
+                        window.open(link, '_blank');
+                        window.setTimeout(function () {
+                                window.location = redirect;
+                            },
+                            3000);
                     }).error(function(){
                         //@todo show error message and redirect to shop
                     });
@@ -55,28 +40,13 @@ var WS = {
                         type: 'POST'
                     }).success(function (response) {
                         response = JSON.parse(response);
-                        if (response.success) {
-                            var newForm = jQuery('<form>', {
-                                'action': response.payload.data.url,
-                                'target': '_top',
-                                'method': 'POST'
-                            }).append(jQuery('<input>', {
-                                'name': 'payment_link',
-                                'value': response.payload.data.payment_link,
-                                'type': 'hidden'
-                            })).append(jQuery('<input>', {
-                                'name': 'checkout_type',
-                                'value': 'debit',
-                                'type': 'hidden'
-                            })).append(jQuery('<input>', {
-                                'name': 'order_id',
-                                'value': response.payload.data.order_id,
-                                'type': 'hidden'
-                            }));
-                            jQuery(newForm).submit();
-                        } else {
-                            error();
-                        }
+                        var link = response.payload.data.payment_link;
+                        var redirect = response.payload.data.url + '?order_id=' + response.payload.data.order_id + '&link_debit=' + link;
+                        window.open(link, '_blank');
+                        window.setTimeout(function () {
+                                window.location = redirect;
+                            },
+                            3000);
                     }).error(function(){
                         //@todo show error message and redirect to shop
                     });
@@ -145,25 +115,7 @@ var WS = {
                         type: 'POST'
                     }).success(function (response) {
                         response = JSON.parse(response);
-                        if (response.success) {
-                            var newForm = jQuery('<form>', {
-                                'action': response.payload.data.url,
-                                'target': '_top',
-                                'method': 'POST'
-                            }).append(jQuery('<input>', {
-                                'name': 'checkout_type',
-                                'value': 'credit-card',
-                                'type': 'hidden'
-                            })).append(jQuery('<input>', {
-                                'name': 'order_id',
-                                'value': response.payload.data.order_id,
-                                'type': 'hidden'
-                            }))
-                            jQuery(newForm).submit();
-                        } else {
-                            error();
-                            //@todo show error message and redirect to shop
-                        }
+                        window.location = response.payload.data.url + '?order_id=' + response.payload.data.order_id;
                     }).error(function(){
                         //@todo show error message and redirect to shop
                     });
