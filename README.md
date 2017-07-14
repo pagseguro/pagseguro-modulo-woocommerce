@@ -14,8 +14,8 @@ Requisitos
 ----------
 ---
  - [WordPress] 3.8+
- - [WooCommerce] 2.1+
- - [PHP] 5.4.27
+ - [WooCommerce] 2.2+
+ - [PHP] 5.4.27+
  - [SimpleXml]
  - [cURL]
 
@@ -25,7 +25,7 @@ Instalação
 ---
  - Certifique-se de que não há instalação de outros módulos para o PagSeguro em seu sistema;
  - Baixe o repositório como arquivo zip ou faça um clone;
- - Na área administrativa de seu WordPress acesse o menu Plugins -> Adicionar Novo -> Enviar -> aponte para o caminho do arquivo woocommerce-pagseguro-oficial.zip e selecione Instalar Agora;
+ - Na área administrativa de seu WordPress acesse o menu Plugins -> Adicionar Novo -> Enviar/Fazer upload do plugin -> aponte para o caminho do arquivo woocommerce-pagseguro-oficial.zip e selecione Instalar Agora;
  - Após a instalação selecione *Ativar plugin*;
 
 
@@ -40,12 +40,13 @@ Para acessar e configurar o módulo acesse, na área administrativa de seu WordP
  - **e-mail**: e-mail cadastrado no PagSeguro.
  - **token**: token gerado no PagSeguro.
  - **envinronment**: Ambiente de produção ou desenvolvimento (sandbox).
+ - **checkout**: especifica o modelo de checkout que será utilizado. É possível escolher entre checkout padrão,checkout lightbox e transparente.
  - **url de redirecionamento**: ao final do fluxo de pagamento no PagSeguro, seu cliente será redirecionado automaticamente para a página de confirmação em sua loja ou então para a URL que você informar neste campo. Para ativar o redirecionamento ao final do pagamento é preciso ativar o serviço de [Pagamentos via API]. Obs.: Esta URL é informada automaticamente e você só deve alterá-la caso deseje que seus clientes sejam redirecionados para outro local.
  - **url de notificação**: sempre que uma transação mudar de status, o PagSeguro envia uma notificação para sua loja ou para a URL que você informar neste campo. Obs.: Esta URL é informada automaticamente e você só deve alterá-la caso deseje receber as notificações em outro local.
  - **prefixo dos pedidos**: informe um prefixo para diferenciar a origem de suas vendas caso utilize a mesma conta PagSeguro em múltiplas lojas. O formato deve se manter com o prefixo 'WC-' seguido por treze caracteres alphanuméricos.
  - **charset**: codificação do seu sistema (ISO-8859-1 ou UTF-8).
  - **log**: ativa/desativa a geração de logs.
- - **diretório**: informe o local a partir da raíz de instalação do WordPress onde se deseja criar o arquivo de log. Ex.: /logs/ps.log. Caso não informe nada, o log será gravado dentro da pasta ../PagSeguroLibrary/PagSeguro.log.
+ - **diretório**: informe o local a partir da raíz de instalação do WordPress onde se deseja criar o arquivo de log. Ex.: /logs/ps.log. Caso não informe nada, o log será gravado dentro da pasta wp-content/PagSeguro.log.
 
 Inputs
 ---------
@@ -65,6 +66,10 @@ Inputs
 Changelog
 ---------
 ---
+1.4.4
+ - Correção de bugs no checkout transparente no redirecionamento e botões de pagamento de débito e boleto.
+ - Correção de bugs na url no checkout lightbox
+
 1.4.0
  - Implementado checkout transparente (boleto, debito online e cartão de crédito)
  
