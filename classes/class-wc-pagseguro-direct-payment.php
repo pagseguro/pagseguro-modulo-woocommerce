@@ -159,11 +159,11 @@ if ( ! class_exists('WC_PagSeguro_Direct_Payment')):
          */
         private function validate_data($data)
         {
-            if (is_null($data['order_id']))
+            if (!isset($data['order_id']) && $data['order_id'])
                 throw new WC_PagSeguro_Exception('O campos `order_id` não pode ser nulo.', 400);
-            if (is_null($data['sender_hash']))
+            if (!isset($data['checkout_type']) && $data['checkout_type'] === 'credit_card' && !isset($data['sender_hash']))
                 throw new WC_PagSeguro_Exception('O campo `sender_hash` não pode ser nulo.', 400);
-            if (is_null($data['sender_hash']))
+            if (!isset($data['sender_document']))
                 throw new WC_PagSeguro_Exception('O campo `sender_document` não pode ser nulo.', 400);
             return $data;
         }
