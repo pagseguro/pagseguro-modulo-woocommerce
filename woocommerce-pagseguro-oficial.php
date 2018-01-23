@@ -231,6 +231,42 @@ if ( ! class_exists( 'WC_PagSeguro' )) :
     });
 
     /**
+     * Intercept woocommerce checkout process
+     */
+    add_action('woocommerce_checkout_process', 'ps_validade_checkout_proccess');
+
+    function ps_validade_checkout_proccess() {
+        try {
+            $billing_address_1 = explode(', ', $_POST['billing_address_1']);
+            if(!isset($billing_address_1[1])){
+                throw new Exception('[PAGSEGURO]: Invalid address');
+            };
+        } catch (Exception $exception){
+            wc_add_notice(__('Endereço com formato inválido. Exemplo: Rua São João, 11'), 'error');
+        }
+
+        try {
+            if(!isset($_POST['billing_address_2']) || !$_POST['billing_address_2']){
+                throw new Exception('[PAGSEGURO]: Invalid address');
+            }
+        } catch (Exception $exception){
+            wc_add_notice(__('Por favor, preencha o bairro.'), 'error');
+        }
+
+
+        try {
+            $phone = count(filter_var($_POST['billing_phone'], FILTER_SANITIZE_NUMBER_INT));
+
+            if($phone < 9 || $phone > 11){
+                throw new Exception('[PAGSEGURO]: Invalid phone');
+            }
+        } catch (Exception $exception){
+            wc_add_notice(__('Telefone inválido. Preencha DDD + NÚMERO'), 'error');
+        }
+    }
+
+
+    /**
      *  Call actions for notification
      */
     function notification_listener()
