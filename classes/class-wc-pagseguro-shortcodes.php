@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists('WC_PagSeguro_Shortcodes')):
-    
+
     class WC_PagSeguro_Shortcodes
     {
         /**
@@ -32,7 +32,8 @@ if ( ! class_exists('WC_PagSeguro_Shortcodes')):
             $shortcodes = array(
                 'pagseguro_checkout' => __CLASS__ . '::checkout',
                 'pagseguro_direct_payment' => __CLASS__ . '::direct_payment',
-                'pagseguro_order_confirmation' => __CLASS__ . '::order_confirmation'
+                'pagseguro_order_confirmation' => __CLASS__ . '::order_confirmation',
+                'pagseguro_order_error' => __CLASS__ . '::order_error'
             );
 
             foreach ( $shortcodes as $shortcode => $function ) {
@@ -53,6 +54,11 @@ if ( ! class_exists('WC_PagSeguro_Shortcodes')):
         public static function order_confirmation()
         {
             include(pathinfo(__DIR__)['dirname'] . '/template/order-received.php');
+        }
+
+        public static function order_error()
+        {
+            include(pathinfo(__DIR__)['dirname'] . '/template/order-error.php');
         }
     }
 

@@ -90,6 +90,24 @@ if ( ! class_exists('WC_PagSeguro_Pages')):
         }
 
         /**
+         * Create PagSeguro Checkout Error Page
+         *
+         * @param $parent_id
+         *
+         * @void
+         */
+        public function create_pagseguro_checkout_error($parent_id)
+        {
+            $checkout = array(
+                'name'    => _x( 'order-error', 'Page slug', 'woocommerce' ),
+                'title'   => _x( 'PagSeguro Erro', 'Page title', 'woocommerce' ),
+                'content' => '[pagseguro_order_error]',
+                'parent'  => $parent_id
+            );
+            $this->create_page($checkout);
+        }
+
+        /**
          * Remove all PagSeguro pages
          */
         public function remove_pagseguro_pages()

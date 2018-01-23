@@ -22,8 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists('WC_PagSeguro_Setup')):
-    
-    class WC_PagSeguro_Setup 
+
+    class WC_PagSeguro_Setup
     {
         /**
          * When plugin is activated
@@ -35,6 +35,7 @@ if ( ! class_exists('WC_PagSeguro_Setup')):
             $pages->create_pagseguro_checkout_page($page_id);
             $pages->create_pagseguro_direct_payment_checkout_page($page_id);
             $pages->create_pagseguro_order_confirmation_checkout_page($page_id);
+            $pages->create_pagseguro_checkout_error($page_id);
         }
     }
 
