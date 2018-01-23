@@ -1,4 +1,8 @@
 <?xml version="1.0"?>
+<!-- 
+    Não recomendamos a utilização deste arquivo como referência aos endpoints do PagSeguro. 
+    Para isto, consulte a documentação em dev.pagseguro.uol.com.br.
+-->
 <Resources>
     <path>
         <protocol>https</protocol>
@@ -91,8 +95,44 @@
                 <request>v2/pre-approvals</request>
             </search>
         </preApproval>
+        <directPreApproval>
+            <request>pre-approvals</request>
+            <accession>
+                <request>pre-approvals</request>
+            </accession>
+            <plan>
+                <request>pre-approvals/request</request>
+            </plan>
+            <query>
+                <request>pre-approvals</request>
+            </query>
+            <payment>
+                <request>pre-approvals/payment</request>
+            </payment>
+            <status>
+                <request>pre-approvals</request>
+            </status>
+            <cancel>
+                <request>pre-approvals</request>
+            </cancel>
+            <discount>
+                <request>pre-approvals</request>
+            </discount>
+            <changePayment>
+                <request>pre-approvals</request>
+            </changePayment>
+            <queryPaymentOrder>
+                <request>pre-approvals</request>
+            </queryPaymentOrder>
+            <queryNotification>
+                <request>pre-approvals/notifications</request>
+            </queryNotification>
+            <retryPaymentOrder>
+                <request>pre-approvals</request>
+            </retryPaymentOrder>
+        </directPreApproval>
         <directPayment>
-            <request>transactions/</request>
+            <request>v2/transactions/</request>
         </directPayment>
     </services>
 </Resources>

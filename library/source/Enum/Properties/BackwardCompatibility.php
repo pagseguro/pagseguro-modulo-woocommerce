@@ -144,7 +144,7 @@ class BackwardCompatibility
     /**
      * Installment no interest installment quantity for credit card payment
      */
-    const INSTALLMENT_NO_INTEREST_INSTALLMENT_QUANTITY = "installment.noInterestInstallmentQuantity=";
+    const INSTALLMENT_NO_INTEREST_INSTALLMENT_QUANTITY = "installment.noInterestInstallmentQuantity";
 
     /**
      *  Item id
@@ -190,21 +190,6 @@ class BackwardCompatibility
      *  Receiver public key
      */
     const RECEIVER_PUBLIC_KEY = "receiver[%s].publicKey";
-
-    /**
-     *  Receiver split amount
-     */
-    const RECEIVER_SPLIT_AMOUNT = "receiver[%s].split.amount";
-
-    /**
-     *  Receiver split rate percent
-     */
-    const RECEIVER_SPLIT_RATE_PERCENT = "receiver[%s].split.ratePercent";
-
-    /**
-     *  Receiver split fee percent
-     */
-    const RECEIVER_SPLIT_FEE_PERCENT = "receiver[%s].split.feePercent";
 
     /**
      * Redirect Url
@@ -305,6 +290,11 @@ class BackwardCompatibility
      *  Shipping address country
      */
     const SHIPPING_ADDRESS_COUNTRY = "shipping.address.country";
+
+    /**
+     * Shipping address required
+     */
+    const SHIPPING_ADDRESS_REQUIRED = "shipping.address.required";
 
     /**
      *  Primary Key
