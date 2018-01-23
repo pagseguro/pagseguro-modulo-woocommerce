@@ -392,7 +392,7 @@ class WC_PagSeguro_Api
             $order->get_billing_city(),
             $order->get_billing_state(),
             $order->get_billing_country(),
-            $address_2[1]
+            (isset($address_2[1]) ? $address_2[1] : null)
         );
     }
 

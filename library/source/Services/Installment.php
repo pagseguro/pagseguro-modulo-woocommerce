@@ -42,7 +42,7 @@ class Installment
 
             $response = Responsibility::http(
                 $http,
-                new Request
+                new Request()
             );
 
             return $response;
@@ -63,7 +63,7 @@ class Installment
         return sprintf(
             "%s?%s%s%s%s",
             $connection->buildInstallmentRequestUrl(),
-            $connection->buildCredentialsQuery(),
+            urldecode($connection->buildCredentialsQuery()),
             sprintf(
                 "&%s=%s",
                 Current::INSTALLMENT_AMOUNT, Currency::toDecimal($params['amount'])
