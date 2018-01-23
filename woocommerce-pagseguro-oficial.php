@@ -255,7 +255,7 @@ if ( ! class_exists( 'WC_PagSeguro' )) :
 
 
         try {
-            $phone = count(filter_var($_POST['billing_phone'], FILTER_SANITIZE_NUMBER_INT));
+            $phone = strlen(filter_var($_POST['billing_phone'], FILTER_SANITIZE_NUMBER_INT));
 
             if($phone < 9 || $phone > 11){
                 throw new Exception('[PAGSEGURO]: Invalid phone');
