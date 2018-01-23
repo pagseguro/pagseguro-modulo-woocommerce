@@ -67,7 +67,7 @@ if ( ! class_exists('WC_PagSeguro_Status')):
 
         public static function add_css()
         {
-            wp_enqueue_style( 'woocommerce-pagseguro-styles', plugins_url('woocommerce-pagseguro-oficial/assets/css/styles.css') );
+            wp_enqueue_style( 'woocommerce-pagseguro-styles', plugins_url('assets/css/styles.css') );
         }
 
         public static function register_ps_order_status($order_statuses)

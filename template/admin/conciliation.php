@@ -73,7 +73,7 @@ limitations under the License.
         </table>
     </div>
 </div>
-<script type="text/javascript" charset="utf8" src="<?php echo plugins_url('woocommerce-pagseguro-oficial/assets/js/jquery.js'); ?>"></script>
-<script type="text/javascript" charset="utf8" src="<?php echo plugins_url('woocommerce-pagseguro-oficial/assets/js/jquery.dataTables.min.js'); ?>"></script>
-<script type="text/javascript" charset="utf8" src="<?php echo plugins_url('woocommerce-pagseguro-oficial/assets/js/modal.js'); ?>"></script>
-<script type="text/javascript" charset="utf8" src="<?php echo plugins_url('woocommerce-pagseguro-oficial/assets/js/conciliation.js'); ?>"></script>
+<script type="text/javascript" charset="utf8" src="<?php echo plugins_url('assets/js/jquery.js'); ?>"></script>
+<script type="text/javascript" charset="utf8" src="<?php echo plugins_url('assets/js/jquery.dataTables.min.js'); ?>"></script>
+<script type="text/javascript" charset="utf8" src="<?php echo plugins_url('assets/js/modal.js'); ?>"></script>
+<script type="text/javascript" charset="utf8" src="<?php echo plugins_url('assets/js/conciliation.js'); ?>"></script>
