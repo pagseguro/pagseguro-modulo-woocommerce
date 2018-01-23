@@ -18,6 +18,11 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
+
+if ( ! defined( 'PS_PLUGIN_DIR' ) ) {
+    define( 'PS_PLUGIN_DIR', __FILE__ );
+}
+
 if ( ! class_exists( 'WC_PagSeguro' )) :
 
     class WC_PagSeguro {
@@ -184,7 +189,7 @@ if ( ! class_exists( 'WC_PagSeguro' )) :
     add_action('admin_enqueue_scripts', function(){
         wp_enqueue_style(
             'dataTable-styles',
-            plugins_url('/assets/css/jquery.dataTables.css', __FILE__), '', 1, 'screen'
+            plugins_url('/assets/css/jquery.dataTables.css', PS_PLUGIN_DIR), '', 1, 'screen'
         );
     });
 
@@ -192,9 +197,9 @@ if ( ! class_exists( 'WC_PagSeguro' )) :
      * Include ajax object
      */
     add_action( 'wp_enqueue_scripts', function(){
-        wp_enqueue_script( 'ajax-script', plugins_url( '/assets/js/direct-payment.js', __FILE__ ), array('jquery') );
+        wp_enqueue_script( 'ajax-script', plugins_url( '/assets/js/direct-payment.js', PS_PLUGIN_DIR ), array('jquery') );
         wp_localize_script( 'ajax-script', 'ajax_object',
-            array( 'ajax_url' => plugins_url( 'classes/class-wc-pagseguro-ajax.php' , __FILE__ ) ));
+            array( 'ajax_url' => plugins_url( '/classes/class-wc-pagseguro-ajax.php' , PS_PLUGIN_DIR ) ));
     });
 
     /**
@@ -203,11 +208,11 @@ if ( ! class_exists( 'WC_PagSeguro' )) :
     add_action('wp_enqueue_scripts', function(){
         wp_enqueue_script(
             'bootstrap-script',
-            plugins_url( '/assets/js/vendor/bootstrap.min.js', __FILE__ ), array('jquery')
+            plugins_url( '/assets/js/vendor/bootstrap.min.js', PS_PLUGIN_DIR ), array('jquery')
         );
         wp_enqueue_style(
             'bootstrap-styles',
-            plugins_url('/assets/css/vendor/bootstrap.min.css', __FILE__)
+            plugins_url('/assets/css/vendor/bootstrap.min.css', PS_PLUGIN_DIR)
         );
     });
 
@@ -217,11 +222,11 @@ if ( ! class_exists( 'WC_PagSeguro' )) :
     add_action('wp_enqueue_scripts', function (){
         wp_enqueue_style(
             'font-awesome-styles',
-            plugins_url('/assets/css/vendor/font-awesome.min.css', __FILE__)
+            plugins_url('/assets/css/vendor/font-awesome.min.css', PS_PLUGIN_DIR)
         );
         wp_enqueue_style(
             'direct-payment-styles',
-            plugins_url('/assets/css/direct-payment.css', __FILE__)
+            plugins_url('/assets/css/direct-payment.css', PS_PLUGIN_DIR)
         );
     });
 

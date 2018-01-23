@@ -67,7 +67,7 @@ limitations under the License.
         </table>
     </div>
 </div>
-<script type="text/javascript" charset="utf8" src="<?php echo plugins_url('assets/js/jquery.js'); ?>"></script>
-<script type="text/javascript" charset="utf8" src="<?php echo plugins_url('assets/js/jquery.dataTables.min.js'); ?>"></script>
-<script type="text/javascript" charset="utf8" src="<?php echo plugins_url('assets/js/modal.js'); ?>"></script>
-<script type="text/javascript" charset="utf8" src="<?php echo plugins_url('assets/js/cancel.js'); ?>"></script>
+<script type="text/javascript" charset="utf8" src="<?php echo plugins_url('/assets/js/jquery.js', PS_PLUGIN_DIR); ?>"></script>
+<script type="text/javascript" charset="utf8" src="<?php echo plugins_url('/assets/js/jquery.dataTables.min.js', PS_PLUGIN_DIR); ?>"></script>
+<script type="text/javascript" charset="utf8" src="<?php echo plugins_url('/assets/js/modal.js', PS_PLUGIN_DIR); ?>"></script>
+<script type="text/javascript" charset="utf8" src="<?php echo plugins_url('/assets/js/cancel.js', PS_PLUGIN_DIR); ?>"></script>

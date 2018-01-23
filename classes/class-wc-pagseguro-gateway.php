@@ -54,7 +54,7 @@ class WC_PagSeguro_Gateway extends WC_Payment_Gateway
         $this->id             = 'pagseguro';
         $this->has_fields     = false;
         $this->method_title   = __('PagSeguro', 'woocomerce-pagseguro-oficial');
-        $this->icon           = plugins_url( 'assets/images/logo_pagseguro200x41.png', __DIR__ );
+        $this->icon           = plugins_url( '/assets/images/logo_pagseguro200x41.png', PS_PLUGIN_DIR );
 
         // Load the form fields.
         $this->init_form_fields();

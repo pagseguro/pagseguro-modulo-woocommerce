@@ -1,7 +1,7 @@
 <div class="ps-modal-overlay">
 
     <div class="ps-modal ps-loading">
-        <img src="<?php echo plugins_url('assets/images/reload.svg'); ?>" alt="icon loading page">
+        <img src="<?php echo plugins_url('/assets/images/reload.svg', PS_PLUGIN_DIR); ?>" alt="icon loading page">
     </div><<!-- /.modal-loading -->
 
     <div class="ps-modal ps-success" id="ps-modal-sucess">
