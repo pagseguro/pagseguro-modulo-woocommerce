@@ -34,7 +34,7 @@ if ( ! class_exists('WC_PagSeguro_Pages')):
         public function create_pagseguro_page()
         {
             $pagseguro = array(
-                'name'    => _x( 'pagseguro', 'Page slug', 'woocommerce' ),
+                'name'    => 'pagseguro',
                 'title'   => _x( 'PagSeguro', 'Page title', 'woocommerce' ),
                 'content' => ''
             );
@@ -49,7 +49,7 @@ if ( ! class_exists('WC_PagSeguro_Pages')):
         public function create_pagseguro_checkout_page($parent_id)
         {
             $checkout = array(
-                'name'    => _x( 'checkout', 'Page slug', 'woocommerce' ),
+                'name'    => 'checkout',
                 'title'   => _x( 'PagSeguro Checkout', 'Page title', 'woocommerce' ),
                 'content' => '[pagseguro_checkout]',
                 'parent'  => $parent_id
@@ -65,7 +65,7 @@ if ( ! class_exists('WC_PagSeguro_Pages')):
         public function create_pagseguro_direct_payment_checkout_page($parent_id)
         {
             $checkout = array(
-                'name'    => _x( 'direct-payment', 'Page slug', 'woocommerce' ),
+                'name'    => 'direct-payment',
                 'title'   => _x( 'PagSeguro Checkout Transparente', 'Page title', 'woocommerce' ),
                 'content' => '[pagseguro_direct_payment]',
                 'parent'  => $parent_id
@@ -81,7 +81,7 @@ if ( ! class_exists('WC_PagSeguro_Pages')):
         public function create_pagseguro_order_confirmation_checkout_page($parent_id)
         {
             $checkout = array(
-                'name'    => _x( 'order-confirmation', 'Page slug', 'woocommerce-pagseguro-oficial' ),
+                'name'    => 'order-confirmation',
                 'title'   => _x( 'PagSeguro Ordem Recebida', 'Page title', 'woocommerce-pagseguro-oficial' ),
                 'content' => '[pagseguro_order_confirmation]',
                 'parent'  => $parent_id
@@ -99,7 +99,7 @@ if ( ! class_exists('WC_PagSeguro_Pages')):
         public function create_pagseguro_checkout_error($parent_id)
         {
             $checkout = array(
-                'name'    => _x( 'order-error', 'Page slug', 'woocommerce' ),
+                'name'    => 'order-error',
                 'title'   => _x( 'PagSeguro Erro', 'Page title', 'woocommerce' ),
                 'content' => '[pagseguro_order_error]',
                 'parent'  => $parent_id
