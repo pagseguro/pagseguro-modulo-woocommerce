@@ -22,7 +22,15 @@ $user_data = get_user_meta(get_current_user_id(), '_pagseguro_data', true);
 if ($user_data) {
     $response = current($user_data);
     $js = $user_data['js'];
-    delete_user_meta(get_current_user_id(), '_pagseguro_data');
+//    delete_user_meta(get_current_user_id(), '_pagseguro_data');
+}
+$url = get_permalink(get_page_by_path('pagseguro/order-confirmation'));
+
+if (!strpos($url, '?')) {
+    $order = wc_get_customer_last_order(get_current_user_id());
+    $url = $url . '?order_id=' . $order->get_id();
+} else {
+    $url = $url . '&order_id=' . $order->get_id();
 }
 ?>
 
@@ -32,9 +40,7 @@ if ($user_data) {
         '<?= $response->getCode() ?>',
         {
             success: function () {
-                window.location.href = "<?php echo sprintf('%s/%s', get_site_url(),
-                    'index.php/checkout/order-received');?>";
-
+                window.location.href = "<?= $url ?>";
             },
             abort: function (error) {
                 //todo error page
