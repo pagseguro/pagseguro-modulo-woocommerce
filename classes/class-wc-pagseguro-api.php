@@ -1,23 +1,23 @@
 <?php
 /**
  ************************************************************************
-Copyright [2016] [PagSeguro Internet Ltda.]
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+ * Copyright [2016] [PagSeguro Internet Ltda.]
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  ************************************************************************
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
@@ -145,8 +145,10 @@ class WC_PagSeguro_Api
     /**
      * Set request items
      *
-     * @param \PagSeguro\Domains\Requests\DirectPayment\Boleto | \PagSeguro\Domains\Requests\DirectPayment\OnlineDebit | \PagSeguro\Domains\Requests\DirectPayment\CreditCard $request
-     * @param WC_Order                           $order
+     * @param \PagSeguro\Domains\Requests\DirectPayment\Boleto | \PagSeguro\Domains\Requests\DirectPayment\OnlineDebit
+     *                                                           | \PagSeguro\Domains\Requests\DirectPayment\CreditCard
+     *                                                           $request
+     * @param WC_Order                                                                                                                                                        $order
      *
      * @return mixed
      */
@@ -159,7 +161,7 @@ class WC_PagSeguro_Api
                 $weight = 0;
                 foreach ($woocommerce->cart->cart_contents as $cart_item_key => $values) {
                     $_product = $values['data'];
-                    if ($_product->id == $item['product_id']) {
+                    if ($_product->get_id() == $item['product_id']) {
                         $weight = $_product->get_weight() * 1000;
                         break;
                     }
@@ -245,9 +247,11 @@ class WC_PagSeguro_Api
     /**
      * Set direct paymnet data
      *
-     * @param \PagSeguro\Domains\Requests\DirectPayment\Boleto | \PagSeguro\Domains\Requests\DirectPayment\OnlineDebit | \PagSeguro\Domains\Requests\DirectPayment\CreditCard $request
-     * @param WC_Order                            $order
-     * @param                                     $data
+     * @param \PagSeguro\Domains\Requests\DirectPayment\Boleto | \PagSeguro\Domains\Requests\DirectPayment\OnlineDebit
+     *                                                           | \PagSeguro\Domains\Requests\DirectPayment\CreditCard
+     *                                                           $request
+     * @param WC_Order                                                                                                                                                        $order
+     * @param                                                                                                                                                                 $data
      *
      * @throws Exception
      */
@@ -285,8 +289,10 @@ class WC_PagSeguro_Api
     /**
      * Set shipping data
      *
-     * @param \PagSeguro\Domains\Requests\DirectPayment\Boleto | \PagSeguro\Domains\Requests\DirectPayment\OnlineDebit | \PagSeguro\Domains\Requests\DirectPayment\CreditCard $request
-     * @param WC_Order                            $order
+     * @param \PagSeguro\Domains\Requests\DirectPayment\Boleto | \PagSeguro\Domains\Requests\DirectPayment\OnlineDebit
+     *                                                           | \PagSeguro\Domains\Requests\DirectPayment\CreditCard
+     *                                                           $request
+     * @param WC_Order                                                                                                                                                        $order
      */
     private function set_shipping($request, $order)
     {
@@ -311,9 +317,11 @@ class WC_PagSeguro_Api
     /**
      * Set sender data
      *
-     * @param \PagSeguro\Domains\Requests\DirectPayment\Boleto | \PagSeguro\Domains\Requests\DirectPayment\OnlineDebit | \PagSeguro\Domains\Requests\DirectPayment\CreditCard $request
-     * @param WC_Order                            $order
-     * @param                                     $data
+     * @param \PagSeguro\Domains\Requests\DirectPayment\Boleto | \PagSeguro\Domains\Requests\DirectPayment\OnlineDebit
+     *                                                           | \PagSeguro\Domains\Requests\DirectPayment\CreditCard
+     *                                                           $request
+     * @param WC_Order                                                                                                                                                        $order
+     * @param                                                                                                                                                                 $data
      *
      * @throws WC_Data_Exception
      */
@@ -375,8 +383,10 @@ class WC_PagSeguro_Api
     /**
      * Set billing data
      *
-     * @param \PagSeguro\Domains\Requests\DirectPayment\Boleto | \PagSeguro\Domains\Requests\DirectPayment\OnlineDebit | \PagSeguro\Domains\Requests\DirectPayment\CreditCard $request
-     * @param WC_Order                            $order
+     * @param \PagSeguro\Domains\Requests\DirectPayment\Boleto | \PagSeguro\Domains\Requests\DirectPayment\OnlineDebit
+     *                                                           | \PagSeguro\Domains\Requests\DirectPayment\CreditCard
+     *                                                           $request
+     * @param WC_Order                                                                                                                                                        $order
      */
     private function set_billing($request, $order)
     {
@@ -399,9 +409,11 @@ class WC_PagSeguro_Api
     /**
      * Set holder data
      *
-     * @param \PagSeguro\Domains\Requests\DirectPayment\Boleto | \PagSeguro\Domains\Requests\DirectPayment\OnlineDebit | \PagSeguro\Domains\Requests\DirectPayment\CreditCard $request
-     * @param WC_Order                            $order
-     * @param                                     $data
+     * @param \PagSeguro\Domains\Requests\DirectPayment\Boleto | \PagSeguro\Domains\Requests\DirectPayment\OnlineDebit
+     *                                                           | \PagSeguro\Domains\Requests\DirectPayment\CreditCard
+     *                                                           $request
+     * @param WC_Order                                                                                                                                                        $order
+     * @param                                                                                                                                                                 $data
      */
     private function set_holder($request, $order, $data)
     {
