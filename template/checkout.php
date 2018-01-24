@@ -42,8 +42,8 @@ if (!strpos($url, '?')) {
             success: function () {
                 window.location.href = "<?= $url ?>";
             },
-            abort: function (error) {
-                //todo error page
+            abort: function () {
+                window.location.href = "<?= get_permalink(get_page_by_path('pagseguro/order-error')); ?>";
             }
         }
     );
