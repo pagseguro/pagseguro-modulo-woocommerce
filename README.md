@@ -23,8 +23,9 @@ Requisitos
 Instalação
 ----------
 ---
+> **ATENÇÃO** caso já possua alguma versão deste plugin instalado siga as intruções de atualização antes de prosseguir
  - Certifique-se de que não há instalação de outros módulos para o PagSeguro em seu sistema;
- - Baixe o arquivo [Baixe o https://github.com/pagseguro/woocommerce/raw/master/woocommerce-pagseguro-oficial.zip](woocommerce-pagseguro-oficial.zip);
+ - Baixe o arquivo [woocommerce-pagseguro-oficial.zip](https://github.com/pagseguro/woocommerce/raw/master/woocommerce-pagseguro-oficial.zip);
  - Na área administrativa de seu WordPress acesse o menu Plugins -> Adicionar Novo -> Enviar/Fazer upload do plugin -> aponte para o caminho do arquivo woocommerce-pagseguro-oficial.zip e selecione Instalar Agora;
  - Após a instalação selecione *Ativar plugin*;
  
