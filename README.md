@@ -23,10 +23,18 @@ Requisitos
 Instalação
 ----------
 ---
+> **ATENÇÃO** caso já possua alguma versão deste plugin instalado siga as intruções de atualização antes de prosseguir
  - Certifique-se de que não há instalação de outros módulos para o PagSeguro em seu sistema;
- - Baixe o repositório como arquivo zip ou faça um clone;
+ - Baixe o arquivo [woocommerce-pagseguro-oficial.zip](https://github.com/pagseguro/woocommerce/raw/master/woocommerce-pagseguro-oficial.zip);
  - Na área administrativa de seu WordPress acesse o menu Plugins -> Adicionar Novo -> Enviar/Fazer upload do plugin -> aponte para o caminho do arquivo woocommerce-pagseguro-oficial.zip e selecione Instalar Agora;
  - Após a instalação selecione *Ativar plugin*;
+ 
+Atualizando versões <2.x.x
+----------
+---
+ - Exclua a pasta do plugin antigo
+ - Exclua todas as Página Pagseguro e suas sub-páginas
+ - Prossiga do passo 1 da instalação
 
 
 Configuração
@@ -66,29 +74,7 @@ Inputs
 Changelog
 ---------
 ---
-1.4.4
- - Correção de bugs no checkout transparente no redirecionamento e botões de pagamento de débito e boleto.
- - Correção de bugs na url no checkout lightbox
-
-1.4.0
- - Implementado checkout transparente (boleto, debito online e cartão de crédito)
- 
-1.3.0
- - Implementado conciliação e cancelamento.
-
-1.2.0
- - Implementado checkout com lightbox.
-
-1.1.1
-- Ajustes em geral
-
-1.1.0
-
- - Ajuste na ativação/desativação do módulo.
-
-1.0.0
-
- - Versão inicial. Integração com API de checkout e API de notificações.
+Para consultar o log de alterações acesse o arquivo [CHANGELOG.md](CHANGELOG.md).
 
 
 Licença
