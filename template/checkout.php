@@ -22,7 +22,7 @@ $user_data = get_user_meta(get_current_user_id(), '_pagseguro_data', true);
 if ($user_data) {
     $response = current($user_data);
     $js = $user_data['js'];
-//    delete_user_meta(get_current_user_id(), '_pagseguro_data');
+    delete_user_meta(get_current_user_id(), '_pagseguro_data');
 }
 $url = get_permalink(get_page_by_path('pagseguro/order-confirmation'));
 
