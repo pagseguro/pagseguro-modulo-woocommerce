@@ -280,7 +280,7 @@ class WC_PagSeguro_Gateway extends WC_Payment_Gateway
         if ($this->checkout == 'lightbox') {
             $code = $this->payment($order, true);
             $url = get_permalink(get_page_by_path('pagseguro/checkout'));
-            update_user_meta(get_current_user_id(), '_pagseguro_data', [
+            add_user_meta(get_current_user_id(), '_pagseguro_data', [
                 'code' => $code,
                 'js'   => ($this->environment == 'sandbox') ? self::SANDBOX_JS : self::STANDARD_JS,
             ]);
@@ -288,7 +288,7 @@ class WC_PagSeguro_Gateway extends WC_Payment_Gateway
 
         if ($this->checkout == 'direct') {
             $url = get_permalink(get_page_by_path('pagseguro/direct-payment'));
-            update_user_meta(get_current_user_id(), '_pagseguro_data', [
+            add_user_meta(get_current_user_id(), '_pagseguro_data', [
                 'js'           => ($this->environment == 'sandbox') ? self::DIRECT_PAYMENT_URL_SANDBOX : self::DIRECT_PAYMENT_URL,
                 'order_id'     => $order_id,
                 'session_code' => $this->create_session(),

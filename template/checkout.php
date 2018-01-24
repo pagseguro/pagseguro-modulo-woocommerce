@@ -20,15 +20,16 @@
 $user_data = get_user_meta(get_current_user_id(), '_pagseguro_data', true);
 
 if ($user_data) {
-    $user_data = current($user_data);
+    $response = current($user_data);
+    $js = $user_data['js'];
     delete_user_meta(get_current_user_id(), '_pagseguro_data');
 }
 ?>
 
-<script type="text/javascript" src="<?php echo $user_data['js']; ?>"></script>
+<script type="text/javascript" src="<?= $js ?>"></script>
 <script type="text/javascript">
     PagSeguroLightbox(
-        '<?php echo current($user_data['code']); ?>',
+        '<?= $response->getCode() ?>',
         {
             success: function () {
                 window.location.href = "<?php echo sprintf('%s/%s', get_site_url(),
