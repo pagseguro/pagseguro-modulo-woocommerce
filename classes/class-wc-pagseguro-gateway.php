@@ -243,7 +243,7 @@ class WC_PagSeguro_Gateway extends WC_Payment_Gateway
         $api = new WC_PagSeguro_Api($this->settings);
         $transaction = $api->notification();
 
-        $order_id = str_replace('WC-', '', $transaction->getReference());
+        $order_id = str_replace($this->settings['invoice_prefix'], '', $transaction->getReference());
 
         $order = new WC_Order($order_id);
 
