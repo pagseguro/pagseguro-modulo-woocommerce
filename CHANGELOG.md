@@ -1,3 +1,6 @@
+2.0.1
+ - fix rounding inconsistency
+ 
 2.0.0
  - move files from woocommerce-pagseguro-oficial folder to root
  - update php-lib
