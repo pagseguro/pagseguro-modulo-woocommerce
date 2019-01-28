@@ -464,12 +464,38 @@ class WC_PagSeguro_Api
     public function direct_payment_cc_card($order, $data)
     {
         $request = new \PagSeguro\Domains\Requests\DirectPayment\CreditCard();
+        $extra_amount = $this->get_extra_amount($order) + $this->fix_installments_value($order);
+        $request->setExtraAmount($extra_amount);
+
         $this->direct_payment($request, $order, $data);
         try {
             return $request->register($this->get_account_credentials());
         } catch (\Exception $exception) {
             throw new WC_PagSeguro_Exception($exception->getMessage(), $exception->getCode());
         }
+    }
+
+    /**
+     * Fix rounding inconsistency
+     * 
+     * @param  WC_Order $order
+     * @return float
+     */
+    private function fix_installments_value($order) {
+        $total_rounding_before = 0;
+        $total_rounding_after = 0;
+
+        foreach ($order->get_items() as $item_id => $item_data) {
+            $total = $item_data->get_total();
+            $quantity = $item_data->get_quantity();
+
+            $total_rounding_after += $total * $quantity;
+            $total_rounding_before += round($total, 2) * $quantity;
+        }
+
+        $total_rounding_after = round($total_rounding_after, 2);
+
+        return round($total_rounding_after - $total_rounding_before, 2);
     }
 
     /**

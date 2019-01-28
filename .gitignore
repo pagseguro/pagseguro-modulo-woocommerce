@@ -173,3 +173,5 @@ pip-log.txt
 ## SVN
 #################
 .svn/
+
+.idea/
