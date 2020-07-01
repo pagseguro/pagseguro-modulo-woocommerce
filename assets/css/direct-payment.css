@@ -1801,7 +1801,9 @@ a.btn-pagseguro:focus {
     margin-bottom: 1rem;
 }
 
-.pagseguro-installments-table table, th, td {
+.pagseguro-installments-table table,
+.pagseguro-installments-table th,
+.pagseguro-installments-table td {
     border: 1px solid #DDD;
     border-collapse: collapse;
     text-align: center;
