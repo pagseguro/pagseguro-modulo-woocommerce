@@ -241,22 +241,30 @@ if ( ! class_exists( 'WC_PagSeguro' )) :
             try {
                 $billing_address_1 = explode(', ', $_POST['billing_address_1']);
                 if (!isset($billing_address_1[1])) {
-                    throw new Exception('[PAGSEGURO]: Invalid address');
+                    if (!is_plugin_active('woocommerce-extra-checkout-fields-for-brazil/woocommerce-extra-checkout-fields-for-brazil.php')) {
+                        throw new Exception('[PAGSEGURO]: Invalid address');
                 };
+            }
             } catch (Exception $exception) {
                 wc_add_notice(__('Endereço com formato inválido. Exemplo: Rua São João, 11'), 'error');
             }
 
             try {
+                if (is_plugin_active('woocommerce-extra-checkout-fields-for-brazil/woocommerce-extra-checkout-fields-for-brazil.php')) {
+                if (!isset($_POST['billing_neighborhood']) || !$_POST['billing_neighborhood']) {
+                    throw new Exception('[PAGSEGURO]: Invalid address');
+                }
+            } else {
                 if (!isset($_POST['billing_address_2']) || !$_POST['billing_address_2']) {
                     throw new Exception('[PAGSEGURO]: Invalid address');
                 }
+            }
             } catch (Exception $exception) {
                 wc_add_notice(__('Por favor, preencha o bairro.'), 'error');
             }
 
             try {
-                $phone = strlen(filter_var($_POST['billing_phone'], FILTER_SANITIZE_NUMBER_INT));
+                $phone = strlen(str_replace('-', '', filter_var($_POST['billing_phone'], FILTER_SANITIZE_NUMBER_INT)));
 
                 if ($phone < 9 || $phone > 11) {
                     throw new Exception('[PAGSEGURO]: Invalid phone');
